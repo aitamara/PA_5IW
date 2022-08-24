@@ -1,13 +1,11 @@
 import Model from "../Model";
 
+let model = new Model();
+
 class ClientModel extends Model {
-  dbClient = new Model();
   static getClientById = async (client_id: number) => {
     try {
-      let { rows } = await dbClient.dbClient.query(
-        `SELECT * FROM public.user_client WHERE id = $1`,
-        [client_id]
-      );
+      let { rows } = await model.dbClient.query(`SELECT * FROM public.user_client WHERE id = $1`, [client_id]);
       if (rows.length > 0) {
         return { code: 200, message: "succes", data: rows };
       } else {
@@ -21,10 +19,9 @@ class ClientModel extends Model {
 
   getClientByUserName = async function (client_username) {
     try {
-      let { rows } = await dbClient.dbClient.query(
-        `SELECT * FROM public.user_client WHERE lastname LIKE $1`,
-        [client_username]
-      );
+      let { rows } = await model.dbClient.query(`SELECT * FROM public.user_client WHERE lastname LIKE $1`, [
+        client_username,
+      ]);
       if (rows.length > 0) {
         return { code: 200, message: "success", data: rows };
       } else {
@@ -38,22 +35,11 @@ class ClientModel extends Model {
 
   //a retester suite aux modifs
   registerClient = async function (body_params) {
-    const {
-      lastname,
-      firstname,
-      photo,
-      birthdate,
-      phone,
-      address,
-      city,
-      zipcode,
-      gender,
-      user_id,
-    } = body_params;
+    const { lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender, user_id } = body_params;
 
     try {
       /*
-      let { rows } = await dbClient.dbClient.query(
+      let { rows } = await model.dbClient.query(
         `INSERT INTO public.user_client (user_id, lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);`,
         [
           user_id,

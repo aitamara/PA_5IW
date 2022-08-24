@@ -42,5 +42,6 @@
   },
   "directories": {
     "lib": "lib"
-  }
+  },
+  "repository": "https://github.com/aitamara/PA_5IW.git"
 }

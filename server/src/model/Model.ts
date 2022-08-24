@@ -1,12 +1,14 @@
 import pg from "pg";
-const { Client } = pg;
+import dotenv from "dotenv";
+dotenv.config();
 
 class Model {
-  dbClient = (new Client({
-    host: "localhost",
-    port: 5432,
-    user: "postgres",
-    password: "root",
-  })).connect();
+  dbClient = new pg.Pool({
+    user: process.env.PGUSER,
+    host: process.env.PGHOST,
+    database: process.env.PGDATABASE,
+    password: process.env.PGPASSWORD,
+    port: process.env.PGPORT,
+  });
 }
 export default Model;

@@ -1,8 +1,6 @@
-import pg from "pg";
 import Model from "../Model";
 
-const { Client } = pg;
-const client = new Client()
+let model = new Model();
 
 export default class RatingModel extends Model {
   static sendRate = async function () {
@@ -13,7 +11,7 @@ export default class RatingModel extends Model {
     try {
       console.log("hello");
       
-      let { rows } = await dbClient.dbClient.query(
+      let { rows } = await model.dbClient.query(
         `SELECT * FROM rating WHERE id_pro = $1`,
         [pro_id]
       );
@@ -31,7 +29,7 @@ export default class RatingModel extends Model {
   /*
   static getBestRate = async function () {
     try {
-      let { rows } = await dbClient.dbClient.query(
+      let { rows } = await model.dbClient.query(
         `SELECT * FROM rating ORDER BY note DESC LIMIT 10`
       );
       if (rows.length > 0) {
@@ -47,7 +45,7 @@ export default class RatingModel extends Model {
   
   static deleteRate = async function (pro_id: Number) {
     try {
-      let { rows } = await dbClient.dbClient.query(
+      let { rows } = await model.dbClient.query(
         `DELELTE FROM rating WHERE id_pro = $1`,
         [pro_id]
       );

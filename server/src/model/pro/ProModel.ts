@@ -1,12 +1,10 @@
-import pg from "pg";
 import Model from "../Model";
-
-const { Client } = pg;
+let model = new Model();
 
 class ProModel extends Model {
   /*static getProById = async function (pro_id) {
     try {
-      let { rows } = await dbClient.dbClient.query(
+      let { rows } = await model.dbClient.query(
         `SELECT * FROM public.user_pro WHERE id = $1`,
         [pro_id]
       );

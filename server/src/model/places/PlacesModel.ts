@@ -3,7 +3,7 @@ class PlacesModel extends Model {/*
 
   static getPlacesList = async function () {
     try {
-      let { rows } = await dbClient.dbClient.query(`SELECT * FROM public.passions`);
+      let { rows } = await model.dbClient.query(`SELECT * FROM public.passions`);
       if (rows.length > 0) {
         return { code: 200, message: "succes", data: rows };
       } else {
@@ -16,7 +16,7 @@ class PlacesModel extends Model {/*
   };
   static getPlaceByProId = async function (passion_id: number) {
     try {
-      let { rows } = await dbClient.dbClient.query(
+      let { rows } = await model.dbClient.query(
         `SELECT * FROM public.passions WHERE id = $1`,
         [passion_id]
       );
@@ -32,7 +32,7 @@ class PlacesModel extends Model {/*
   };
   static getPlaceByProName = async function (passion_name: string) {
     try {
-      let { rows } = await dbClient.dbClient.query(
+      let { rows } = await model.dbClient.query(
         `SELECT * FROM public.passions WHERE passion_name = $1`,
         [passion_name]
       );
@@ -48,7 +48,7 @@ class PlacesModel extends Model {/*
   };
   static getPlaceByName = async function (passion_name: string) {
     try {
-      let { rows } = await dbClient.dbClient.query(
+      let { rows } = await model.dbClient.query(
         `SELECT * FROM public.passions WHERE passion_name = $1`,
         [passion_name]
       );

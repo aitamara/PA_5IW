@@ -6,7 +6,7 @@ const routerClient = Router();
 
 const clientCtl = new ClientController();
 
-routerClient.get('/auth/:client_id', clientCtl.authenticate);
+routerClient.get('/authentication/:client_id', clientCtl.authenticate);
 routerClient.post('/getClientById/:client_id', clientCtl.getClientById);
 //routerClient.post('/register', client.registerClient);
 

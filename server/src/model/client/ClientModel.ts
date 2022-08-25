@@ -35,6 +35,20 @@ class ClientModel extends Model {
     }
   };
 
+  static getClientsByArrayOfId = async (clientIdList) => {
+    try {
+      let { rows } = await model.dbClient.query(`SELECT * FROM public.user_client WHERE id IN (`+clientIdList+`)`);
+      if (rows.length > 0) {
+        return { code: 200, message: "succes", data: rows };
+      } else {
+        return { code: 404, message: "Utilisateur non trouvé", data: [] };
+      }
+    } catch (err) {
+      console.error(err);
+      return { code: 500, message: err, data: [] };
+    }
+  };
+
   static getClientByUserName = async function (client_username) {
     try {
       let { rows } = await model.dbClient.query(`SELECT * FROM public.user_client WHERE lastname LIKE $1`, [

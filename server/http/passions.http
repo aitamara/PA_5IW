@@ -121,3 +121,13 @@ content-type: application/json
 {
     "pro_id" : 1
 }
+
+###
+# POST Auth
+POST http://localhost:3001/client/authenticate
+content-type: application/json
+
+{
+    "client_email" : "test",
+    "client_password" : "password"
+}

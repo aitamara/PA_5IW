@@ -57,7 +57,7 @@ class ClientModel extends Model {
     try {
       let { rows } = await model.dbClient.query(
         `INSERT INTO public.user_auth (email,password,role) VALUES ($1,$2,$3) RETURNING *;`,
-        [email, password, "client"]
+        [email, model.hashIt(password), "client"]
       );
       if (rows.length > 0) {
         return { status: 200, message: "success", data: rows[0] };

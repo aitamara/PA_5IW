@@ -6,8 +6,8 @@ const routerClient = Router();
 
 const clientCtl = new ClientController();
 
-routerClient.get('/authentication/:client_id', clientCtl.authenticate);
+routerClient.post('/authenticate', clientCtl.authenticate);
 routerClient.post('/getClientById/:client_id', clientCtl.getClientById);
-//routerClient.post('/register', client.registerClient);
+routerClient.post('/register', clientCtl.registerClient);
 
 export { routerClient };

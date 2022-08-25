@@ -1,3 +1,36 @@
+
+###
+# Authentification du client
+POST http://localhost:3001/client/authenticate
+content-type: application/json
+
+{
+    "client_email" : "test@test.fr",
+    "client_password" : "test"
+}
+
+###
+# CRÉER Client
+POST http://localhost:3001/client/register
+content-type: application/json
+
+{
+    "email": "test",
+    "password":"test2",
+    "lastname" : "CCC",
+    "firstname" : "PrenomCli",
+    "photo" : null,
+    "gender":"M",
+    "birthdate" : "11/04/2003",
+    "phone" : "0654345434",
+    "address" : "11 rue de l'Est",
+    "city" : "Paris",
+    "zipcode" : "75015"
+}
+
+
+
+
 ###
 # LIST PASSIONS
 GET http://localhost:3001/passions/
@@ -32,22 +65,7 @@ content-type: application/json
     "password" : "password"
 }
 
-###
-# CRÉER Client
-POST http://localhost:3001/client/register
-content-type: application/json
 
-{
-    "lastname" : "CCC",
-    "firstname" : "PrenomCli",
-    "photo" : null,
-    "birthdate" : "11/04/2003",
-    "phone" : "0654345434",
-    "address" : "11 rue de l'Est",
-    "city" : "Paris",
-    "zipcode" : "75015",
-    "user_id" : 3
-}
 
 ###
 # CRÉER Match

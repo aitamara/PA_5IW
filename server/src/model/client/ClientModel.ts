@@ -76,14 +76,14 @@ class ClientModel extends Model {
   //a retester suite aux modifs
   static registerClient = async function (body_params) {
     const { status, message, data } = await ClientModel.registerAuthDetails(body_params);
-    const { lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender } = body_params;
+    const { lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender, here_for, intrested_by} = body_params;
 
     if (status !== 200 || typeof data.id === undefined) return { code: status, message: message, data: data };
 
     try {
       let { rows } = await model.dbClient.query(
-        `INSERT INTO public.user_client (user_id, lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *;`,
-        [data.id, lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender]
+        `INSERT INTO public.user_client (user_id, lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender, here_for, intrested_by) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *;`,
+        [data.id, lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender, here_for, intrested_by]
       );
       if (rows.length > 0) {
         return { code: 200, message: message, data: rows };

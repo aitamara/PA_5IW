@@ -15,17 +15,19 @@ POST http://localhost:3001/client/register
 content-type: application/json
 
 {
-    "email": "test",
-    "password":"test2",
-    "lastname" : "CCC",
-    "firstname" : "PrenomCli",
+    "email": "client1@mail.com",
+    "password":"password",
+    "lastname" : "NomCli1",
+    "firstname" : "PrenomCli1",
     "photo" : null,
-    "gender":"M",
+    "gender":"F",
     "birthdate" : "11/04/2003",
     "phone" : "0654345434",
-    "address" : "11 rue de l'Est",
+    "address" : "24 Rue Bouret",
     "city" : "Paris",
-    "zipcode" : "75015"
+    "zipcode" : "75019",
+    "here_for" : "both",
+    "intrested_by" : "M"
 }
 
 

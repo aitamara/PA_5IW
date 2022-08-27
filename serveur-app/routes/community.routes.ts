@@ -1,4 +1,4 @@
-import CommunityController from "../controller/community/CommunityController"
+import CommunityController from "../../server/src/controller/community/CommunityController"
 import { Router } from 'express';
 
 const routerCommunity = Router();

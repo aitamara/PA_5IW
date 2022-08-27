@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import path from "path";
 import { routerClient } from "./routes/client.routes";
-import { routerCommunity} from "./routes/community.routes";
+/* import { routerCommunity} from "./routes/community.routes"; */
 import { routerRating } from "./routes/rating.routes";
 import { routerMsg } from "./routes/chatMsg.routes";
 dotenv.config();
@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/client", routerClient);
 app.use("/rating", routerRating);
 app.use("/message", routerMsg);
-app.use("/community", routerCommunity);
+/* app.use("/community", routerCommunity); */
 
 app.use('/dist', express.static(path.join(process.cwd(), 'dist/')));
 app.use(express.static(path.join(process.cwd(), 'public/')));

@@ -1,4 +1,4 @@
-import CommunityController from "../controller/community/CommunityController"
+/* import CommunityController from "../../community/CommunityController"
 import { Router } from 'express';
 
 const routerCommunity = Router();
@@ -13,4 +13,4 @@ routerCommunity.post('/leaveCommunity', communityCtl.leaveCommunity);
 routerCommunity.get('/getCommunitiesByClientId', communityCtl.getCommunitiesByClientId);
 routerCommunity.get('/getCommunitiyMembersByProId', communityCtl.getCommunitiyMembersByProId);
 
-export { routerCommunity };
+export { routerCommunity }; */

@@ -35,6 +35,20 @@ class ClientModel extends Model {
     }
   };
 
+  static getClientsByArrayOfId = async (clientIdList) => {
+    try {
+      let { rows } = await model.dbClient.query(`SELECT * FROM public.user_client WHERE id IN (`+clientIdList+`)`);
+      if (rows.length > 0) {
+        return { code: 200, message: "succes", data: rows };
+      } else {
+        return { code: 404, message: "Utilisateur non trouvé", data: [] };
+      }
+    } catch (err) {
+      console.error(err);
+      return { code: 500, message: err, data: [] };
+    }
+  };
+
   static getClientByUserName = async function (client_username) {
     try {
       let { rows } = await model.dbClient.query(`SELECT * FROM public.user_client WHERE lastname LIKE $1`, [
@@ -57,7 +71,7 @@ class ClientModel extends Model {
     try {
       let { rows } = await model.dbClient.query(
         `INSERT INTO public.user_auth (email,password,role) VALUES ($1,$2,$3) RETURNING *;`,
-        [email, password, "client"]
+        [email, model.hashIt(password), "client"]
       );
       if (rows.length > 0) {
         return { status: 200, message: "success", data: rows[0] };
@@ -76,14 +90,14 @@ class ClientModel extends Model {
   //a retester suite aux modifs
   static registerClient = async function (body_params) {
     const { status, message, data } = await ClientModel.registerAuthDetails(body_params);
-    const { lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender } = body_params;
+    const { lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender, here_for, intrested_by} = body_params;
 
     if (status !== 200 || typeof data.id === undefined) return { code: status, message: message, data: data };
 
     try {
       let { rows } = await model.dbClient.query(
-        `INSERT INTO public.user_client (user_id, lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *;`,
-        [data.id, lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender]
+        `INSERT INTO public.user_client (user_id, lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender, here_for, intrested_by) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *;`,
+        [data.id, lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender, here_for, intrested_by]
       );
       if (rows.length > 0) {
         return { code: 200, message: message, data: rows };

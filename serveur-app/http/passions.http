@@ -15,25 +15,80 @@ POST http://localhost:3001/client/register
 content-type: application/json
 
 {
-    "email": "test",
-    "password":"test2",
-    "lastname" : "CCC",
-    "firstname" : "PrenomCli",
+    "email": "client1@mail.com",
+    "password":"password",
+    "lastname" : "NomCli1",
+    "firstname" : "PrenomCli1",
     "photo" : null,
-    "gender":"M",
+    "gender":"F",
     "birthdate" : "11/04/2003",
     "phone" : "0654345434",
-    "address" : "11 rue de l'Est",
+    "address" : "24 Rue Bouret",
     "city" : "Paris",
-    "zipcode" : "75015"
+    "zipcode" : "75019",
+    "here_for" : "both",
+    "intrested_by" : "M"
 }
 
 
 
 
 ###
-# LIST PASSIONS
-GET http://localhost:3001/passions/
+# LIST COMMUNITY by CLIENTID
+GET http://localhost:3001/community/getCommunityByClientId
+content-type: application/json
+
+{
+    "client_id" : 20
+}
+
+###
+# ADD CLIENT TO COMMUNITY
+POST http://localhost:3001/community/addClientToCommunity
+content-type: application/json
+
+{
+    "pro_id" : 1,
+    "client_id" : 20
+}
+
+###
+# FIRE CLIENT FROM COMMUNITY
+POST http://localhost:3001/community/fireClientFromCommunity
+content-type: application/json
+
+{
+    "pro_id" : 1,
+    "client_id" : 20
+}
+
+###
+# LEAVE A COMMUNITY
+POST http://localhost:3001/community/leaveCommunity
+content-type: application/json
+
+{
+    "pro_id" : 1,
+    "client_id" : 20
+}
+
+###
+# GET COMMUNITY BY CLIENT ID
+GET http://localhost:3001/community/getCommunitiesByClientId
+content-type: application/json
+
+{
+    "client_id" : 20
+}
+
+###
+# GET MEMBERS OF A COMMUNITY BY PRO ID
+GET http://localhost:3001/community/getCommunitiyMembersByProId
+content-type: application/json
+
+{
+    "pro_id" : 1
+}
 
 ###
 # CRÉER PASSION
@@ -120,4 +175,14 @@ content-type: application/json
 
 {
     "pro_id" : 1
+}
+
+###
+# POST Auth
+POST http://localhost:3001/client/authenticate
+content-type: application/json
+
+{
+    "client_email" : "test",
+    "client_password" : "password"
 }

@@ -7,16 +7,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "concurrently": "^7.3.0",
     "crypto": "^1.0.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "got": "^12.1.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.5.1",
-    "nodemon": "^2.0.18",
+    "nodemon": "^2.0.19",
     "pg": "^8.8.0",
-    "sha256": "^0.2.0",
+    "ts-loader": "^9.3.1",
     "typescript": "^4.7.4"
   },
   "devDependencies": {
@@ -28,6 +26,7 @@
     "@types/node": "^14.14.22",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@typescript-eslint/parser": "^4.14.1",
+    "babel-loader": "8.1.0",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",
@@ -37,13 +36,27 @@
     "ts-node": "^10.8.1"
   },
   "scripts": {
-    "start": "nodemon --watch \"*.ts\" --exec \"ts-node\" ./server/src/index.ts",
-    "test": "mocha -r ts-node/register ./server/src/**/test.ts",
+    "test": "mocha -r ts-node/register ./serveur-app/**/test.ts",
     "eslint:fix": "eslint --fix",
-    "install": "echo"
+    "install": "echo",
+    "server": "nodemon --watch \"*.ts\" --exec \"ts-node\" ./serveur-app/index.ts",
+    "client": "npm start --prefix client-app",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "directories": {
     "lib": "lib"
   },
-  "repository": "https://github.com/aitamara/PA_5IW.git"
+  "repository": "https://github.com/aitamara/PA_5IW.git",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

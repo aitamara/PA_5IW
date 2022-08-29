@@ -91,12 +91,15 @@ content-type: application/json
 }
 
 ###
-# CRÉER PASSION
-POST http://localhost:3001/passions/
+# CRÉER MATCH
+POST http://localhost:3001/matchs/createOrUpdateMatch
 content-type: application/json
 
 {
-    "passion_name" : "Sport"
+    "client1_id" : 18,
+    "client2_id" : 19,
+    "pro_id" : 1,
+    "status" : "like"
 }
 
 ###

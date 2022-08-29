@@ -60,7 +60,7 @@ class CommunityModel extends Model {
         try {
             let { rows } = await model.dbClient.query(`UPDATE public.community SET status = false WHERE pro_id = $1 AND client_id = $2`, 
             [pro_id, client_id]);
-            return { code: 200, message: "succes", data: rows };
+            return { code: 200, message: "Client retiré de la communauté", data: rows };
         } catch (err) {
             console.error(err);
             return { code: 500, message: err, data: [] };

@@ -148,16 +148,24 @@ export default class Client {
     return this.password;
   }
 
-  /* public get getDerniereConnexion(): Date {
-    return this.derniere_connexion;
-  } */
-  /* setConnexion() {
-    this.derniere_connexion = new Date();
-  } */
-
   public findPlacesAround(zoneKm: number = 2): Array<Places> {
     let places: Array<Places> = [];
     //faire un ronds autour et trouver les places les plus proches
     return places;
+  }
+
+  public userWithoutPwd(): Object {
+    return {
+      lastname: this.getName,
+      firstname: this.getFirstName,
+      date_of_birth: this.getDate_of_birth,
+      adress: this.getAdress,
+      city: this.getCity,
+      mail: this.getMail,
+      here_for: this.getHereFor,
+      gender: this.gender,
+      interested_by: this.interested_by,
+      id: this.getId,
+    };
   }
 }

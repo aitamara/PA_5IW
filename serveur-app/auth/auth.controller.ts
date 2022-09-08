@@ -25,21 +25,19 @@ export default class AuthController extends ClassCtrl {
       } else {
         try {
           let { mail, password } = req.body;
-          let data = await ClientMdl.queryGetUserByMail(mail);
+          let mdl = new ClientMdl();
+          let data = await mdl.getClientByMail(mail);
           let message: string = "Client inexistant";
-          if (data instanceof Client) {
+          if (data.data.length > 0 && data.data[0] instanceof Client) {
             message = "Mot de passe incorrect";
-            if (await bcrypt.compare(password, data.getPassword)) {
+            if (await bcrypt.compare(password, data.data[0].getPassword)) {
               message = "Impossible de se connecter";
               try {
-                let user = data.userWithoutPwd();
-                data = await ClientMdl.queryConnectUser(data);
-                if (data instanceof Client) {
-                  message = "Client connecté";
-                  response.error = false;
-                  response.data.push({ token: Authentication.auth({ mail: mail }) }, user);
-                  code = 200;
-                }
+                let user = data.data[0].userWithoutPwd();
+                message = "Client connecté";
+                response.error = false;
+                response.data.push({ token: Authentication.auth({ mail: mail }) }, user);
+                code = 200;
               } catch (error) {
                 console.log(error);
               }
@@ -51,50 +49,6 @@ export default class AuthController extends ClassCtrl {
           res.status(400).send(error);
         }
       }
-      res.status(code).send(response);
-    }
-  };
-
-  disconnect = async (req: Request, res: Response) => {
-    let code = 400;
-    let response: QueryResponse = { error: true, message: "Bad request", data: [] };
-    if (Object.keys(req.body).length > 0) {
-      let dataIpt: Array<Verification> = [
-        { label: "mail", type: "string" },
-        { label: "role", type: "string" },
-      ];
-      let listError = this.verifSecure(dataIpt, req.body);
-
-      //Vérification si des erreurs ont été trouvée précédement
-      if (listError.length > 0) {
-        response.message = "Erreur";
-        response.data.push(listError);
-      } else {
-        try {
-          let { mail, role } = req.body;
-          let data = await ClientMdl.queryGetUserByRole(mail, role);
-          let message: string = "Client inexistant";
-          if (data instanceof Client) {
-            try {
-              data = await ClientMdl.queryDisconnectUser(data);
-              if (data instanceof Client) {
-                message = "Client déconnecté";
-                response.error = false;
-              }
-            } catch (error) {
-              console.log(error);
-            }
-          }
-          response.message = message;
-          response.data = [];
-          code = 200;
-        } catch (error) {
-          console.log(error);
-          res.status(400).send(error);
-        }
-      }
-      res.status(code).send(response);
-    } else {
       res.status(code).send(response);
     }
   };

@@ -15,4 +15,12 @@ export default class Pro {
     this.id = id;
     this.name = name;
   }
+
+  public get getId() {
+    return this.id;
+  }
+
+  public set setId(id: number) {
+    this.id = id;
+  }
 }

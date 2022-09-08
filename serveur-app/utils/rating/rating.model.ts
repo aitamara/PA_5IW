@@ -1,13 +1,20 @@
 import Model from "../../model/Model";
+import Pro from "../entity/Pro";
 import Rating from "../entity/Rating";
 
 export default class RatingModel extends Model {
   private table: string = "user_client";
   private model = new Model();
 
-  public getRate = async (id: number) => {
+  /**
+   * Récupération des notes d'un pro
+   *
+   * @param id
+   * @returns
+   */
+  public getRates = async (pro: Pro) => {
     try {
-      let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table} WHERE id = $1`, [id]);
+      let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table} WHERE id_pro = $1`, [pro.getId]);
       if (rows.length > 0) {
         return { error: false, message: "Avis trouvé", data: rows };
       } else {
@@ -19,6 +26,12 @@ export default class RatingModel extends Model {
     }
   };
 
+  /**
+   * Ajout d'une note pour un pro par un client
+   *
+   * @param rating
+   * @returns
+   */
   public sendRate = async (rating: Rating) => {
     try {
       let { rows } = await this.model.dbClient.query(`INSERT INTO ${this.table} WHERE id = $1`, [rating.getId]);
@@ -33,6 +46,12 @@ export default class RatingModel extends Model {
     }
   };
 
+  /**
+   * Suppression d'une note par son créateur
+   *
+   * @param rating
+   * @returns
+   */
   public deleteRate = async (rating: Rating) => {
     try {
       let { rows } = await this.model.dbClient.query(`DELELTE FROM rating WHERE id = $1`, [rating.getId]);

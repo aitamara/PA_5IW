@@ -53,6 +53,32 @@ export default class ClientModel extends Model {
     }
   };
 
+  /**
+   * Récupération d'un client à l'aide du mail
+   *
+   * @param client_id
+   * @returns
+   */
+  getClientByMail = async (mail: string) => {
+    try {
+      let arrClient: Array<Client> = [],
+        client: Client,
+        { rows } = await this.model.dbClient.query(`SELECT * FROM public.${this.table} WHERE mail = $1`, [mail]);
+      if (rows.length > 0) {
+        rows.forEach((e) => {
+          client = new Client(e.lastname, e.firstname, [], e.gender, e.intrested_by, e.mail, e.here_for, e.gender, e.interested_by, e.password);
+          arrClient.push(client);
+        });
+        return { code: 200, message: "succes", data: arrClient };
+      } else {
+        return { code: 404, message: "Pro non trouvé", data: [] };
+      }
+    } catch (err) {
+      console.error(err);
+      return { code: 500, message: err, data: [] };
+    }
+  };
+
   getClientsOfCommunity = async (id_community: number) => {
     try {
       //table de jonction entre community et user

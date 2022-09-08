@@ -4,7 +4,7 @@ import crypto from "crypto";
 
 dotenv.config();
 
-class Model {
+export default class Model {
   dbClient = new pg.Pool({
     user: process.env.PGUSER,
     host: process.env.PGHOST,
@@ -12,10 +12,8 @@ class Model {
     password: process.env.PGPASSWORD,
     port: process.env.PGPORT,
   });
-  hashIt = (plain)=>{
+  hashIt = (plain) => {
     let password = crypto.createHash("sha256").update(plain).digest("hex");
     return password;
-  }
-  
+  };
 }
-export default Model;

@@ -16,7 +16,11 @@ export default class PassionsModel extends Model {
     try {
       let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table}`);
       if (rows.length > 0) {
-        return { success: true, message: "Passions récupérées", data: rows };
+        let passions: Array<Passion> = [];
+        rows.forEach((passion) => {
+          passions.push(new Passion(passion.label));
+        });
+        return { success: true, message: "Passions récupérées", data: passions };
       } else {
         return { success: false, message: "No passions", data: [] };
       }
@@ -35,7 +39,11 @@ export default class PassionsModel extends Model {
     try {
       let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table}`);
       if (rows.length > 0) {
-        return { success: true, message: "Passions récupérées", data: rows };
+        let passions: Array<Passion> = [];
+        rows.forEach((passion) => {
+          passions.push(new Passion(passion.label));
+        });
+        return { success: true, message: "Passions récupérées", data: passions };
       } else {
         return { success: false, message: "No passions", data: [] };
       }

@@ -19,15 +19,13 @@ export default class PassionsController extends Controller {
     let message: string = "Bad request";
     let response: QueryResponse = { error: true, message: message, data: [] };
     try {
-      let passions: Array<Passion> = [];
       let data = await this.passionMdl.getPassionsList();
       response.message = "Aucunes passions";
       response.error = data.success;
-      if (data.data.length > 0) {
-        passions.push(data.data);
-        response.message = `${passions.length} passion(s) récupérée(s)`;
+      if (data.success && data.data.length > 0) {
+        response.message = `${data.data.length} passion(s) récupérée(s)`;
         response.error = false;
-        response.data = passions;
+        response.data = data.data;
       }
     } catch (error) {
       console.log(error);
@@ -49,7 +47,7 @@ export default class PassionsController extends Controller {
     if (Object.keys(req.body).length > 0) {
       let dataIpt: Array<Verification> = [
         { label: "id_client", type: "number" },
-        { label: "passions", type: "string" },
+        { label: "passions", type: "array" },
       ];
       let listError = this.verifSecure(dataIpt, req.body);
 
@@ -60,17 +58,16 @@ export default class PassionsController extends Controller {
         try {
           let cltMdl = new ClientModel();
           let id_passions: Array<number> = [];
-          let passions: Array<Passion> = [];
           let data = await this.passionMdl.getPassionsById(id_passions);
-          if (data.data.length > 0) {
-            passions.push(data.data);
+
+          if (data.success && data.data.length > 0) {
             let user = await cltMdl.getClientById(+req.body.id_client);
             if (user.data.length > 0 && user.data[0] instanceof Client) {
-              data = await this.passionMdl.setPassionsListForClient(user.data[0], passions);
+              data = await this.passionMdl.setPassionsListForClient(user.data[0], data.data);
             }
             response.message = data.message;
             response.error = false;
-            response.data = passions;
+            response.data = data.data;
           } else {
             response.message = "Aucunes passions";
             response.error = data.success ?? true;

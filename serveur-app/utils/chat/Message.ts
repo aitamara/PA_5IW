@@ -14,6 +14,4 @@ export default class Message {
     this.content = content;
     this.sendDate = sendDate;
   }
-
-  private verifyIdConv(id) {}
 }

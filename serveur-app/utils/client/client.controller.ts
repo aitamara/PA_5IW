@@ -90,8 +90,8 @@ export default class ClientController extends Controller {
         try {
           code = 200;
           message = "Client inexistant";
-          let data: Client[] = await this.cltMdl.getClientById(+req.params.client_id);
-          if (data.length > 0) {
+          let data = await this.cltMdl.getClientById(+req.params.client_id);
+          if (data.data.length > 0) {
             message = "Client récupéré";
             response.data.push(data);
           }
@@ -162,8 +162,8 @@ export default class ClientController extends Controller {
         try {
           code = 200;
           message = "Aucun client";
-          let data: Client[] = await this.cltMdl.getClientById(+req.params.client_id);
-          if (data.length > 0) {
+          let data = await this.cltMdl.getClientById(+req.params.client_id);
+          if (data.data.length > 0) {
             message = "Client récupéré";
             response.data.push(data);
           }
@@ -234,8 +234,8 @@ export default class ClientController extends Controller {
         try {
           code = 200;
           message = "Client inexistant";
-          let data: Client[] = await this.cltMdl.getClientById(+req.params.client_id);
-          if (data.length > 0) {
+          let data = await this.cltMdl.getClientById(+req.params.client_id);
+          if (data.data.length > 0) {
             message = "Client récupéré";
             response.data.push(data);
           }

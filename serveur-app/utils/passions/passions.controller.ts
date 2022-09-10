@@ -1,5 +1,6 @@
 import Controller from "../../controller/Controller";
 import ClientModel from "../client/client.model";
+import Client from "../entity/Client";
 import Passion from "../entity/Passion";
 import QueryResponse from "../interfaces/query.interface";
 import Verification from "../interfaces/verification.interface";
@@ -43,8 +44,7 @@ export default class PassionsController extends Controller {
    */
   updatePassionClient = async (req, res) => {
     let code = 400;
-    let message: string = "Bad request";
-    let response: QueryResponse = { error: true, message: message, data: [] };
+    let response: QueryResponse = { error: true, message: "Bad request", data: [] };
 
     if (Object.keys(req.body).length > 0) {
       let dataIpt: Array<Verification> = [
@@ -62,14 +62,18 @@ export default class PassionsController extends Controller {
           let id_passions: Array<number> = [];
           let passions: Array<Passion> = [];
           let data = await this.passionMdl.getPassionsById(id_passions);
-          response.message = "Aucunes passions";
-          response.error = data.success ?? true;
           if (data.data.length > 0) {
             passions.push(data.data);
-            let user = await cltMdl.getClientById(+req.params.client_id);
-            data = await this.passionMdl.setPassionsListForClient(user, passions);
+            let user = await cltMdl.getClientById(+req.body.id_client);
+            if (user.data.length > 0 && user.data[0] instanceof Client) {
+              data = await this.passionMdl.setPassionsListForClient(user.data[0], passions);
+            }
+            response.message = data.message;
             response.error = false;
             response.data = passions;
+          } else {
+            response.message = "Aucunes passions";
+            response.error = data.success ?? true;
           }
         } catch (error) {
           console.log(error);

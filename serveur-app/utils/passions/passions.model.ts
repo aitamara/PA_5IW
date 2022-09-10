@@ -55,7 +55,7 @@ export default class PassionsModel extends Model {
       await this.model.dbClient.query(`DELETE * FROM ${this.tableWithClient} WHERE id = $1`, [client.getId]);
       let { rows } = await this.model.dbClient.query(`INSERT INTO ${this.tableWithClient} `, [client.getId]);
       if (rows.length > 0) {
-        return { success: true, message: "Passions mises à jours", data: rows };
+        return { success: true, message: "Passions mises à jours", data: [] };
       } else {
         return { success: false, message: "Impossible de modifier les passions", data: [] };
       }

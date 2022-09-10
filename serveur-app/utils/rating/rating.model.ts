@@ -3,8 +3,8 @@ import Pro from "../entity/Pro";
 import Rating from "../entity/Rating";
 
 export default class RatingModel extends Model {
-  private table: string = "user_client";
-  private model = new Model();
+  private table: string = "rating";
+  private model: Model;
 
   /**
    * Récupération des notes d'un pro
@@ -16,13 +16,13 @@ export default class RatingModel extends Model {
     try {
       let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table} WHERE id_pro = $1`, [pro.getId]);
       if (rows.length > 0) {
-        return { error: false, message: "Avis trouvé", data: rows };
+        return { success: true, message: "Avis trouvé", data: rows };
       } else {
-        return { error: true, message: "Avis non trouvée", data: [] };
+        return { success: false, message: "Avis non trouvée", data: [] };
       }
     } catch (err) {
       console.error(err);
-      return { error: true, message: err, data: [] };
+      return { success: true, message: err, data: [] };
     }
   };
 
@@ -36,9 +36,9 @@ export default class RatingModel extends Model {
     try {
       let { rows } = await this.model.dbClient.query(`INSERT INTO ${this.table} WHERE id = $1`, [rating.getId]);
       if (rows.length > 0) {
-        return { code: 200, message: "succes", data: rows };
+        return { success: true, message: "Avis ajouté", data: rows };
       } else {
-        return { code: 404, message: "Avis ajouté", data: [] };
+        return { success: false, message: "Impossible d'ajouté l'avis", data: [] };
       }
     } catch (err) {
       console.error(err);
@@ -56,47 +56,13 @@ export default class RatingModel extends Model {
     try {
       let { rows } = await this.model.dbClient.query(`DELELTE FROM rating WHERE id = $1`, [rating.getId]);
       if (rows.length > 0) {
-        return { code: 200, success: true, data: rows };
+        return { success: true, message: "Avis supprimé", data: rows };
       } else {
-        return { code: 404, success: false, data: [] };
+        return { success: false, message: "Impossible de supprimé l'avis", data: [] };
       }
     } catch (err) {
       console.error(err);
       return { code: 500, message: err, data: [] };
     }
   };
-
-  /* getRateByPro = async function (pro_id: Number) {
-    try {
-      console.log("hello");
-
-      let { rows } = await model.dbClient.query(`SELECT * FROM rating WHERE id_pro = $1`, [pro_id]);
-      if (rows.length > 0) {
-        return { code: 200, message: "succes", data: rows };
-      } else {
-        return { code: 404, message: "Aucune note trouvée", data: [] };
-      }
-    } catch (err) {
-      console.error(err);
-      return { code: 500, message: err, data: [] };
-    }
-  }; */
-  /*
-  static getBestRate = async function () {
-    try {
-      let { rows } = await model.dbClient.query(
-        `SELECT * FROM rating ORDER BY note DESC LIMIT 10`
-      );
-      if (rows.length > 0) {
-        return { code: 200, message: "succes", data: rows };
-      } else {
-        return { code: 404, message: "Aucun avis trouvé", data: [] };
-      }
-    } catch (err) {
-      console.error(err);
-      return { code: 500, message: err, data: [] };
-    }
-  };
-  
-  */
 }

@@ -56,12 +56,13 @@ export default class RatingController extends Controller {
               rate = new Rating(mark, text, pro, client);
             });
 
-            //4. créer rate
-            code = 200;
-            data = await this.mdl.sendRate(rate);
-            if (data) {
-              message = "Avis créé";
-              response.data.push(data);
+            if (rate instanceof Rating) {
+              code = 200;
+              data = await this.mdl.sendRate(rate);
+              if (data) {
+                message = "Avis créé";
+                response.data.push(data);
+              }
             }
           } catch (error) {
             res.status(400).send(error);
@@ -93,8 +94,8 @@ export default class RatingController extends Controller {
         response.data.push(listError);
       } else {
         try {
-          let { data } = await this.mdl.getRate(req.body.id);
-          let data2 = await this.mdl.getRate(req.body.id);
+          let { data } = await this.mdl.getRates(req.body.id);
+          let data2 = await this.mdl.getRates(req.body.id);
           if (data.length > 0 && !data.error) {
             code = 200;
             let { mark, text, id_pro, id_client } = data.rows[0];

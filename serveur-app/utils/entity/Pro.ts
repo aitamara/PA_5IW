@@ -3,7 +3,7 @@ import Rating from "./Rating";
 export default class Pro {
   private id: number;
   private name: string;
-  private adresse: string;
+  private adress: string;
   private city: string;
   private mail: string;
   private time_display: Date;
@@ -14,6 +14,18 @@ export default class Pro {
   constructor(id: number, name: string) {
     this.id = id;
     this.name = name;
+  }
+
+  public get getName() {
+    return this.name;
+  }
+
+  public get getAdress() {
+    return this.adress;
+  }
+
+  public get getCity() {
+    return this.city;
   }
 
   public get getId() {

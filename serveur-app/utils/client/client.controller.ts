@@ -53,11 +53,22 @@ export default class ClientController extends Controller {
         try {
           code = 200;
           message = "Aucun client";
-          let client = new Client(req.body);
-          let data: Client[] = await this.cltMdl.registerClient(client);
-          if (data.length > 0) {
+          let client = new Client(
+            req.body.lastname,
+            req.body.firstname,
+            req.body.date_of_birth,
+            req.body.adress,
+            req.body.city,
+            req.body.mail,
+            req.body.here_for,
+            req.body.gender,
+            req.body.interested_by,
+            req.body.password
+          );
+          let data = await this.cltMdl.registerClient(client);
+          if (data.success && data.data.length > 0) {
             message = "Client récupéré";
-            response.data.push(data);
+            response.data.push(data.data);
           }
         } catch (error) {
           console.log(error);
@@ -126,10 +137,10 @@ export default class ClientController extends Controller {
         try {
           code = 200;
           message = "Aucun client";
-          let data: Client[] = await this.cltMdl.getClientsOfCommunity(+req.params.id_community);
-          if (data.length > 0) {
+          let data = await this.cltMdl.getClientsOfCommunity(+req.params.id_community);
+          if (data.success && data.data.length > 0) {
             message = "Client récupéré";
-            response.data.push(data);
+            response.data.push(data.data);
           }
         } catch (error) {
           console.log(error);
@@ -163,9 +174,9 @@ export default class ClientController extends Controller {
           code = 200;
           message = "Aucun client";
           let data = await this.cltMdl.getClientById(+req.params.client_id);
-          if (data.data.length > 0) {
+          if (data.success && data.data.length > 0) {
             message = "Client récupéré";
-            response.data.push(data);
+            response.data.push(data.data);
           }
         } catch (error) {
           console.log(error);
@@ -198,8 +209,8 @@ export default class ClientController extends Controller {
         try {
           code = 200;
           message = "Client inexistant";
-          let data: Client[] = await this.cltMdl.getClientById(+req.params.client_id);
-          if (data.length > 0) {
+          let data = await this.cltMdl.getClientById(+req.params.client_id);
+          if (data.data.length > 0) {
             message = "Client récupéré";
             response.data.push(data);
           }
@@ -270,8 +281,8 @@ export default class ClientController extends Controller {
         try {
           code = 200;
           message = "Client inexistant";
-          let data: Client[] = await this.cltMdl.getClientById(req.body.client_id);
-          if (data.length > 0) {
+          let data = await this.cltMdl.getClientById(req.body.client_id);
+          if (data.data.length > 0) {
             message = "Client récupéré";
             response.data.push(data);
           }

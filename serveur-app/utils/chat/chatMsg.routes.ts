@@ -5,7 +5,6 @@ const routerMsg = Router();
 
 routerMsg.get("/list/", ChatMsgCtrl.getMsg);
 routerMsg.get("/list/user", ChatMsgCtrl.getMsgUser);
-routerMsg.get("/last/", ChatMsgCtrl.getLastMsg);
 routerMsg.post("/send/", ChatMsgCtrl.sendMsg);
 
 export { routerMsg };

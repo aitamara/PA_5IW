@@ -27,43 +27,8 @@ export default class Client {
     here_for: Array<Here>,
     gender: Gender,
     interested_by: Array<Gender>,
-    password: string
-  ); // definition 1
-
-  constructor(
-    id: number,
-    lastname: string,
-    firstname: string,
-    date_of_birth: Date,
-    adress: string,
-    city: string,
-    mail: string,
-    here_for: Array<Here>,
-    gender: Gender,
-    interested_by: Array<Gender>
-  ); // definition 2
-
-  constructor(...args: any[]) {}
-
-  /* constructor(lastname: string, firstname: string, here_for: Array<Here>, gender: Gender, interested_by: Array<Gender>) {
-    this.lastname = lastname;
-    this.firstname = firstname;
-    this.here_for = here_for;
-    this.gender = gender;
-    this.interested_by = interested_by;
-  } */
-
-  /* public createClient(
-    lastname: string,
-    firstname: string,
-    date_of_birth: Date,
-    adress: string,
-    city: string,
-    mail: string,
-    here_for: Array<Here>,
-    gender: Gender,
-    interested_by: Array<Gender>,
-    password: string
+    id?: number,
+    password?: string
   ) {
     this.lastname = lastname;
     this.firstname = firstname;
@@ -74,32 +39,9 @@ export default class Client {
     this.here_for = here_for;
     this.gender = gender;
     this.interested_by = interested_by;
-    this.password = password;
+    if (id) this.id = id;
+    if (password) this.password = password;
   }
-
-  public importClient(
-    id: number,
-    lastname: string,
-    firstname: string,
-    date_of_birth: Date,
-    adress: string,
-    city: string,
-    mail: string,
-    here_for: Array<Here>,
-    gender: Gender,
-    interested_by: Array<Gender>
-  ) {
-    this.id = id;
-    this.lastname = lastname;
-    this.firstname = firstname;
-    this.date_of_birth = date_of_birth;
-    this.adress = adress;
-    this.city = city;
-    this.mail = mail;
-    this.here_for = here_for;
-    this.gender = gender;
-    this.interested_by = interested_by;
-  } */
 
   public get getName(): string {
     return this.lastname;

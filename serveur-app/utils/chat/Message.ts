@@ -1,4 +1,4 @@
-import { State } from "./State";
+import { State } from "../chat/State";
 import RatingModel from "../rating/rating.model";
 
 export default class Message {

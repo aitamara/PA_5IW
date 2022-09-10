@@ -17,13 +17,13 @@ export default class ClientModel extends Model {
       client_password = this.model.hashIt(client_password);
       let { rows } = await this.model.dbClient.query(`SELECT * FROM public.user_auth WHERE email = $1 AND password = $2`, [client_email, client_password]);
       if (rows.length > 0) {
-        return { code: 200, message: "succes", data: rows };
+        return { success: true, message: "succes", data: rows };
       } else {
-        return { code: 404, message: "Utilisateur non trouvé", data: [client_email, client_password] };
+        return { success: false, message: "Utilisateur non trouvé", data: [client_email, client_password] };
       }
     } catch (err) {
       console.error(err);
-      return { code: 500, message: err, data: [] };
+      return { success: false, message: err, data: [] };
     }
   };
 
@@ -40,16 +40,16 @@ export default class ClientModel extends Model {
         { rows } = await this.model.dbClient.query(`SELECT * FROM public.${this.table} WHERE id = $1`, [client_id]);
       if (rows.length > 0) {
         rows.forEach((e) => {
-          client = new Client(e.lastname, e.firstname, [], e.gender, e.intrested_by, e.mail, e.here_for, e.gender, e.interested_by, e.password);
+          client = new Client(e.lastname, e.firstname, e.date_of_birth, e.gender, e.intrested_by, e.mail, e.here_for, e.gender, e.interested_by, e.password);
           arrClient.push(client);
         });
-        return { code: 200, message: "succes", data: arrClient };
+        return { success: true, message: "succes", data: arrClient };
       } else {
-        return { code: 404, message: "Pro non trouvé", data: [] };
+        return { success: false, message: "Pro non trouvé", data: [] };
       }
     } catch (err) {
       console.error(err);
-      return { code: 500, message: err, data: [] };
+      return { success: false, message: err, data: [] };
     }
   };
 
@@ -66,16 +66,16 @@ export default class ClientModel extends Model {
         { rows } = await this.model.dbClient.query(`SELECT * FROM public.${this.table} WHERE mail = $1`, [mail]);
       if (rows.length > 0) {
         rows.forEach((e) => {
-          client = new Client(e.lastname, e.firstname, [], e.gender, e.intrested_by, e.mail, e.here_for, e.gender, e.interested_by, e.password);
+          client = new Client(e.lastname, e.firstname, e.date_of_birth, e.gender, e.intrested_by, e.mail, e.here_for, e.gender, e.interested_by, e.password);
           arrClient.push(client);
         });
-        return { code: 200, message: "succes", data: arrClient };
+        return { success: true, message: "succes", data: arrClient };
       } else {
-        return { code: 404, message: "Pro non trouvé", data: [] };
+        return { success: false, message: "Pro non trouvé", data: [] };
       }
     } catch (err) {
       console.error(err);
-      return { code: 500, message: err, data: [] };
+      return { success: false, message: err, data: [] };
     }
   };
 
@@ -84,13 +84,13 @@ export default class ClientModel extends Model {
       //table de jonction entre community et user
       let { rows } = await this.model.dbClient.query(`SELECT * FROM user_comminty WHERE id_community = $1`, [id_community]);
       if (rows.length > 0) {
-        return { code: 200, message: "succes", data: rows };
+        return { success: true, message: "succes", data: rows };
       } else {
-        return { code: 404, message: "Aucun utilisateurs trouvés", data: [] };
+        return { success: false, message: "Aucun utilisateurs trouvés", data: [] };
       }
     } catch (err) {
       console.error(err);
-      return { code: 500, message: err, data: [] };
+      return { success: false, message: err, data: [] };
     }
   };
 
@@ -144,13 +144,13 @@ export default class ClientModel extends Model {
         [data.id, lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender, here_for, intrested_by]
       );
       if (rows.length > 0) {
-        return { code: 200, message: message, data: rows };
+        return { success: true, message: message, data: rows };
       } else {
-        return { code: 404, message: message, data: rows };
+        return { success: false, message: message, data: rows };
       }
     } catch (err) {
       console.error(err);
-      return { code: 500, message: err, data: [] };
+      return { success: false, message: err, data: [] };
     }
   };
 }

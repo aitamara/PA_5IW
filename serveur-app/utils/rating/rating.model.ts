@@ -22,7 +22,7 @@ export default class RatingModel extends Model {
       }
     } catch (err) {
       console.error(err);
-      return { success: true, message: err, data: [] };
+      return { success: false, message: err, data: [] };
     }
   };
 
@@ -42,7 +42,7 @@ export default class RatingModel extends Model {
       }
     } catch (err) {
       console.error(err);
-      return { code: 500, message: err, data: [] };
+      return { success: false, message: err, data: [] };
     }
   };
 
@@ -56,13 +56,13 @@ export default class RatingModel extends Model {
     try {
       let { rows } = await this.model.dbClient.query(`DELELTE FROM rating WHERE id = $1`, [rating.getId]);
       if (rows.length > 0) {
-        return { success: true, message: "Avis supprimé", data: rows };
+        return { success: true, message: "Avis supprimé", data: [] };
       } else {
         return { success: false, message: "Impossible de supprimé l'avis", data: [] };
       }
     } catch (err) {
       console.error(err);
-      return { code: 500, message: err, data: [] };
+      return { success: false, message: err, data: [] };
     }
   };
 }

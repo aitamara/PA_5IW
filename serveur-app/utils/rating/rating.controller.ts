@@ -86,7 +86,7 @@ export default class RatingController extends Controller {
     let response: QueryResponse = { error: true, message: "Bad request", data: [] };
 
     if (Object.keys(req.params).length > 0) {
-      let dataIpt: Array<Verification> = [{ label: "id", type: "number" }];
+      let dataIpt: Array<Verification> = [{ label: "id_rate", type: "number" }];
       let listError = this.verifSecure(dataIpt, req.body);
 
       if (listError.length > 0) {
@@ -94,15 +94,14 @@ export default class RatingController extends Controller {
         response.data.push(listError);
       } else {
         try {
-          let { data } = await this.mdl.getRates(req.body.id);
-          let data2 = await this.mdl.getRates(req.body.id);
-          if (data.length > 0 && !data.error) {
+          let data = await this.mdl.getRates(req.body.iid_rated);
+          if (data.data.length > 0 && data.success) {
             code = 200;
-            let { mark, text, id_pro, id_client } = data.rows[0];
+            let { mark, text, id_pro, id_client } = data.data[0];
             let rate = new Rating(mark, text, id_pro, id_client);
             response.message = "Impossible de supprimer l'avis";
             data = await this.mdl.deleteRate(rate);
-            if (data === 200) {
+            if (data.success) {
               response.message = "Avis supprimé";
               response.error = false;
             }

@@ -22,7 +22,7 @@ export default class PassionsModel extends Model {
       }
     } catch (err) {
       console.error(err);
-      return { code: 500, message: err, data: [] };
+      return { success: false, message: err, data: [] };
     }
   };
 
@@ -41,7 +41,7 @@ export default class PassionsModel extends Model {
       }
     } catch (err) {
       console.error(err);
-      return { code: 500, message: err, data: [] };
+      return { success: false, message: err, data: [] };
     }
   };
 
@@ -61,7 +61,7 @@ export default class PassionsModel extends Model {
       }
     } catch (err) {
       console.error(err);
-      return { code: 500, message: err, data: [] };
+      return { success: false, message: err, data: [] };
     }
   };
 }

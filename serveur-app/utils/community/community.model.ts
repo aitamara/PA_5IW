@@ -5,18 +5,66 @@ export default class CommunityModel extends Model {
   private table_with_user: string = "user_comminty";
   private model = new Model();
 
-  getCommunitiyMembers = async (id_community: number) => {
+  /**
+   * Récupération des communauté
+   *
+   * @param id_community
+   *
+   * @returns
+   */
+  public getCommunity = async () => {
     try {
-      //table de jonction entre community et user
-      let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table_with_user} WHERE id_community = $1`, [id_community]);
+      let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table}`);
       if (rows.length > 0) {
-        return { code: 200, message: "succes", data: rows };
+        return { success: true, message: "Communautés récupérées", data: rows };
       } else {
-        return { code: 404, message: "Aucun utilisateurs trouvés", data: [] };
+        return { success: true, message: "Aucunes communautés trouvées", data: [] };
       }
     } catch (err) {
       console.error(err);
-      return { code: 500, message: err, data: [] };
+      return { success: false, message: err, data: [] };
+    }
+  };
+
+  /**
+   * Récupération des membres d'une communauté
+   *
+   * @param id_community
+   *
+   * @returns
+   */
+  public getCommunityByClientId = async (id_community: number) => {
+    try {
+      let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table_with_user} WHERE id_community = $1`, [id_community]);
+      if (rows.length > 0) {
+        return { success: true, message: "succes", data: rows };
+      } else {
+        return { success: true, message: "Aucun utilisateurs trouvés", data: [] };
+      }
+    } catch (err) {
+      console.error(err);
+      return { success: false, message: err, data: [] };
+    }
+  };
+
+  /**
+   * Récupération des membres d'une communauté
+   *
+   * @param id_community
+   *
+   * @returns
+   */
+  public getCommunitiyMembers = async (id_community: number) => {
+    try {
+      let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table_with_user} WHERE id_community = $1`, [id_community]);
+      if (rows.length > 0) {
+        return { success: true, message: "succes", data: rows };
+      } else {
+        return { success: true, message: "Aucun utilisateurs trouvés", data: [] };
+      }
+    } catch (err) {
+      console.error(err);
+      return { success: false, message: err, data: [] };
     }
   };
 }

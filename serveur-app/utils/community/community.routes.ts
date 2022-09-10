@@ -4,7 +4,7 @@ import { Router } from "express";
 const routerCommunity = Router();
 const communityCtl = new CommunityController();
 
-routerCommunity.get("/getCommunitys", communityCtl.getCommunityByClientId); //récupération des communautés
+routerCommunity.get("/getCommunitys", communityCtl.getCommunity); //récupération des communautés
 routerCommunity.get("/getCommunityByClientId", communityCtl.getCommunityByClientId); //récupération des communautés d'un client
 routerCommunity.get("/getCommunitiyMembers", communityCtl.getCommunitiyMembers); //récupération des membres d'une communauté
 

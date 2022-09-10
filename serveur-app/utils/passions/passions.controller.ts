@@ -22,7 +22,7 @@ export default class PassionsController extends Controller {
       let passions: Array<Passion> = [];
       let data = await this.passionMdl.getPassionsList();
       response.message = "Aucunes passions";
-      response.error = data.success ?? true;
+      response.error = data.success;
       if (data.data.length > 0) {
         passions.push(data.data);
         response.message = `${passions.length} passion(s) récupérée(s)`;

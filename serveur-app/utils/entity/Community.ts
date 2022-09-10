@@ -1,6 +1,6 @@
 import Pro from "./Pro";
 
-export default class community {
+export default class Community {
   private name: string;
   private pro: Pro;
   private id: number;

@@ -6,7 +6,7 @@ import Client from "../entity/Client";
 import ClientModel from "./client.model";
 
 export default class ClientController extends Controller {
-  private cltMdl = new ClientModel();
+  private mdl = new ClientModel();
 
   /**
    * Connexion de l'utilisateur
@@ -15,7 +15,7 @@ export default class ClientController extends Controller {
    * @param res
    */
   public authenticate = async (req: Request, res: Response) => {
-    let response = await this.cltMdl.authenticate(req.body.client_email ?? "", req.body.client_password ?? "");
+    let response = await this.mdl.authenticate(req.body.client_email ?? "", req.body.client_password ?? "");
     console.log(req.body);
     res.json(response);
   };
@@ -65,7 +65,7 @@ export default class ClientController extends Controller {
             req.body.interested_by,
             req.body.password
           );
-          let data = await this.cltMdl.registerClient(client);
+          let data = await this.mdl.registerClient(client);
           if (data.success && data.data.length > 0) {
             message = "Client récupéré";
             response.data.push(data.data);
@@ -101,7 +101,7 @@ export default class ClientController extends Controller {
         try {
           code = 200;
           message = "Client inexistant";
-          let data = await this.cltMdl.getClientById(+req.params.client_id);
+          let data = await this.mdl.getClientById(+req.params.client_id);
           if (data.data.length > 0) {
             message = "Client récupéré";
             response.data.push(data);
@@ -137,7 +137,7 @@ export default class ClientController extends Controller {
         try {
           code = 200;
           message = "Aucun client";
-          let data = await this.cltMdl.getClientsOfCommunity(+req.params.id_community);
+          let data = await this.mdl.getClientsOfCommunity(+req.params.id_community);
           if (data.success && data.data.length > 0) {
             message = "Client récupéré";
             response.data.push(data.data);
@@ -173,7 +173,7 @@ export default class ClientController extends Controller {
         try {
           code = 200;
           message = "Aucun client";
-          let data = await this.cltMdl.getClientById(+req.params.client_id);
+          let data = await this.mdl.getClientById(+req.params.client_id);
           if (data.success && data.data.length > 0) {
             message = "Client récupéré";
             response.data.push(data.data);
@@ -209,7 +209,7 @@ export default class ClientController extends Controller {
         try {
           code = 200;
           message = "Client inexistant";
-          let data = await this.cltMdl.getClientById(+req.params.client_id);
+          let data = await this.mdl.getClientById(+req.params.client_id);
           if (data.data.length > 0) {
             message = "Client récupéré";
             response.data.push(data);
@@ -245,7 +245,7 @@ export default class ClientController extends Controller {
         try {
           code = 200;
           message = "Client inexistant";
-          let data = await this.cltMdl.getClientById(+req.params.client_id);
+          let data = await this.mdl.getClientById(+req.params.client_id);
           if (data.data.length > 0) {
             message = "Client récupéré";
             response.data.push(data);
@@ -281,7 +281,7 @@ export default class ClientController extends Controller {
         try {
           code = 200;
           message = "Client inexistant";
-          let data = await this.cltMdl.getClientById(req.body.client_id);
+          let data = await this.mdl.getClientById(req.body.client_id);
           if (data.data.length > 0) {
             message = "Client récupéré";
             response.data.push(data);

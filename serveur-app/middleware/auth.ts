@@ -5,15 +5,16 @@ import TokenValidation from "../auth/token.validation";
 const AUTH_ROUTES = ["/auth/connect"];
 
 const authToken = (req: Request, res: Response, next: NextFunction) => {
+
   if (AUTH_ROUTES.some((r) => r == req.url)) {
     next();
     return;
   }
-
+  
   // test le header avec bearer
   const authHeader = req.headers["authorization"];
-  if (!authHeader) return res.sendStatus(401);
   console.log(authHeader);
+  if (!authHeader) return res.sendStatus(401);
 
   // test l'existance du token
   const token = authHeader.split(" ")[1];

@@ -45,8 +45,8 @@ export default class ClientModel extends Model {
         client: Client,
         { rows } = await this.model.dbClient.query(`SELECT * FROM public.${this.table} WHERE id = $1`, [client_id]);
       if (rows.length > 0) {
-        rows.forEach((e) => {
-          client = new Client(e.lastname, e.firstname, e.date_of_birth, e.gender, e.intrested_by, e.mail, e.here_for, e.gender, e.interested_by, e.password);
+        rows.forEach((e) => {          
+          client = new Client(e.lastname, e.firstname, e.birthdate, e.address, e.city, e.zipcode, e.email, e.here_for, e.gender, e.interested_by);
           arrClient.push(client);
         });
         return { success: true, message: "succes", data: arrClient };

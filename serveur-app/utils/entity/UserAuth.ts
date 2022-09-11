@@ -1,4 +1,4 @@
-import { roles } from "serveur-app/constants/Roles";
+import { roles } from "../../constants/Roles";
 
 export default class UserAuth {
   private email: string;

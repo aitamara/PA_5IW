@@ -2,23 +2,11 @@ import { Request, Response } from "express";
 import Controller from "../../controller/Controller";
 import QueryResponse from "../interfaces/query.interface";
 import Verification from "../interfaces/verification.interface";
-import Client from "../entity/Client";
 import ClientModel from "./client.model";
+import ClientRegister from "../entity/ClientRegister";
 
 export default class ClientController extends Controller {
   private mdl = new ClientModel();
-
-  /**
-   * Connexion de l'utilisateur
-   *
-   * @param req
-   * @param res
-   */
-  public authenticate = async (req: Request, res: Response) => {
-    let response = await this.mdl.authenticate(req.body.client_email ?? "", req.body.client_password ?? "");
-    console.log(req.body);
-    res.json(response);
-  };
 
   /**
    * Enregistrement d'un client
@@ -35,9 +23,11 @@ export default class ClientController extends Controller {
       let dataIpt: Array<Verification> = [
         { label: "lastname", type: "string" },
         { label: "firstname", type: "string" },
-        { label: "date_of_birth", type: "Date" },
+        { label: "photo", type: "string" },
+        { label: "birthdate", type: "Date" },
         { label: "adress", type: "string" },
         { label: "city", type: "string" },
+        { label: "zipcode", type: "string" },
         { label: "mail", type: "string" },
         { label: "here_for", type: "array" },
         { label: "gender", type: "string" },
@@ -53,18 +43,8 @@ export default class ClientController extends Controller {
         try {
           code = 200;
           message = "Aucun client";
-          let client = new Client(
-            req.body.lastname,
-            req.body.firstname,
-            req.body.date_of_birth,
-            req.body.adress,
-            req.body.city,
-            req.body.mail,
-            req.body.here_for,
-            req.body.gender,
-            req.body.interested_by,
-            req.body.password
-          );
+          let { lastname, firstname, photo, birthdate, phone, adress, city, zipcode, gender, here_for, interested_by, password } = req.body;
+          let client = new ClientRegister(lastname, firstname, photo, birthdate, phone, adress, city, zipcode, gender, here_for, interested_by, password);
           let data = await this.mdl.registerClient(client);
           if (data.success && data.data.length > 0) {
             message = "Client récupéré";

@@ -1,4 +1,4 @@
-import { passions } from "serveur-app/constants/Passions";
+import { passions } from "../../constants/Passions";
 
 export default class Passion {
   label: passions;

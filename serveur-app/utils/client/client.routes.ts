@@ -5,7 +5,6 @@ import { Router } from "express";
 const routerClient = Router();
 const clientCtl = new ClientController();
 
-routerClient.post("/authenticate", clientCtl.authenticate); //authentification d'un client
 routerClient.post("/getClientById", clientCtl.getClientById); //récupération d'un client
 routerClient.post("/register", clientCtl.registerClient); //enregistrement d'un compte client
 routerClient.post("/update", clientCtl.registerClient); //modification d'un compte client

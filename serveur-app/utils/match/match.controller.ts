@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Controller from "serveur-app/controller/Controller";
+import Controller from "../../controller/Controller";
 import ClientModel from "../client/client.model";
 import Client from "../entity/Client";
 import QueryResponse from "../interfaces/query.interface";

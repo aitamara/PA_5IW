@@ -4,10 +4,7 @@ import Verification from "../utils/interfaces/verification.interface";
 import UserMdl from "../utils/user/user.model";
 import Authentication from "./token.validation";
 import ClassCtrl from "../controller/Controller";
-import UserAuth from "serveur-app/utils/entity/UserAuth";
-import { roles } from "serveur-app/constants/Roles";
-import ProModel from "serveur-app/utils/pro/pro.model";
-import ClientModel from "serveur-app/utils/client/client.model";
+import UserAuth from "../utils/entity/UserAuth";
 
 export default class AuthController extends ClassCtrl {
   connect = async (req, res) => {

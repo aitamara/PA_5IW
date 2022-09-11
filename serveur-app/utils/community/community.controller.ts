@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Authentication from "serveur-app/auth/token.validation";
+import Authentication from "../../auth/token.validation";
 import Controller from "../../controller/Controller";
 import ClientModel from "../client/client.model";
 import Client from "../entity/Client";

@@ -1,9 +1,7 @@
-import Places from "./Places";
 import { Gender } from "../../constants/Gender";
 import { Here } from "../../constants/Here";
 
-export default class Client {
-  private id: number;
+export default class ClientRegister {
   private lastname: string;
   private firstname: string;
   private photo: string;
@@ -15,9 +13,9 @@ export default class Client {
   private gender: Gender = Gender.MASC;
   private here_for: Array<Here>;
   private interested_by: Array<Gender> = [];
+  private password: string;
 
   constructor(
-    id: number,
     lastname: string,
     firstname: string,
     photo: string,
@@ -28,9 +26,9 @@ export default class Client {
     zipcode: string,
     gender: Gender,
     here_for: Array<Here>,
-    interested_by: Array<Gender>
+    interested_by: Array<Gender>,
+    password: string
   ) {
-    this.id = id;
     this.lastname = lastname;
     this.firstname = firstname;
     this.photo = photo;
@@ -42,6 +40,7 @@ export default class Client {
     this.gender = gender;
     this.here_for = here_for;
     this.interested_by = interested_by;
+    this.password = password;
   }
 
   public get getFirstName(): string {
@@ -86,19 +85,5 @@ export default class Client {
 
   public get getInterested_by(): Gender[] {
     return this.interested_by;
-  }
-
-  public get getId() {
-    return this.id;
-  }
-
-  public set setId(id: number) {
-    this.id = id;
-  }
-
-  public findPlacesAround(zoneKm: number = 2): Array<Places> {
-    let places: Array<Places> = [];
-    //faire un ronds autour et trouver les places les plus proches
-    return places;
   }
 }

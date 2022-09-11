@@ -10,9 +10,9 @@ export default class ClientMatch {
   private city: string;
   private zipcode: string;
   private gender: Gender = Gender.MASC;
-  private here_for: String;
+  private here_for: Here = Here.ALL;
 
-  constructor(id: number, lastname: string, firstname: string, photo: string, birthdate: Date, city: string, zipcode: string, gender: Gender, here_for: String) {
+  constructor(id: number, lastname: string, firstname: string, photo: string, birthdate: Date, city: string, zipcode: string, gender: Gender, here_for: Here) {
     this.id = id;
     this.lastname = lastname;
     this.firstname = firstname;
@@ -48,7 +48,7 @@ export default class ClientMatch {
     return this.zipcode;
   }
 
-  public get getHereFor(): String {
+  public get getHereFor(): Here {
     return this.here_for;
   }
 

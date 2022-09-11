@@ -29,9 +29,9 @@ export default class ClientController extends Controller {
         { label: "city", type: "string" },
         { label: "zipcode", type: "string" },
         { label: "mail", type: "string" },
-        { label: "here_for", type: "array" },
+        { label: "here_for", type: "string" },
         { label: "gender", type: "string" },
-        { label: "interested_by", type: "array" },
+        { label: "interested_by", type: "string" },
         { label: "password", type: "string" },
       ];
       let listError = this.verifSecure(dataIpt, req.body);

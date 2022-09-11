@@ -1,5 +1,5 @@
 export enum Here {
-  AMI = "amitié",
-  AMO = "amour",
-  REN = "rencontre",
+  FRI = "FRIENDSHIP",
+  LOV = "LOVE",
+  ALL = "ALL",
 }

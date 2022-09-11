@@ -17,7 +17,7 @@ import Authentication from "./auth/token.validation";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 81;
+const PORT = 81;
 const oneDay = 1000 * 60 * 60 * 24;
 const app = express();
 

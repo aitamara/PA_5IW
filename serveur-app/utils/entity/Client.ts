@@ -28,8 +28,8 @@ export default class Client {
     here_for: Array<Here>,
     gender: Gender,
     interested_by: Array<Gender>,
-    id?: number,
-    password?: string
+    password?: string,
+    id?: number
   ) {
     this.lastname = lastname;
     this.firstname = firstname;

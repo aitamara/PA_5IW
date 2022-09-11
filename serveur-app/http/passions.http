@@ -1,12 +1,12 @@
 
 ###
 # Authentification du client
-POST http://localhost:3001/client/authenticate
+POST http://localhost:81/auth/connect
 content-type: application/json
 
 {
-    "client_email" : "test@test.fr",
-    "client_password" : "test"
+    "email" : "client1@mail.com",
+    "password" : "password"
 }
 
 ###
@@ -135,12 +135,18 @@ content-type: application/json
 
 ###
 # LIRE Client
-GET http://localhost:3001/client/clientById/1
+POST http://localhost:81/client/getClientById
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NjI4NjM4NDAsImV4cCI6MTY2Mjk1MDI0MH0.u4DXIuD9ws18tQGze71KAFeoXARM4GNc3PHVgjofC9E
+content-type: application/json
+
+{
+    "id_client" : 19
+}
 
 
 ###
 # LIST Propositions de Match
-GET http://localhost:3001/matchs/propositions
+GET http://localhost:81/matchs/propositions
 content-type: application/json
 
 {

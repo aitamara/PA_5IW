@@ -15,15 +15,14 @@ import { cookieParser } from "cookie-parser";
 import { sessions } from "express-session";
 import { ClientToServerEvents, InterServerEvents, ServerToClientEvents, SocketData } from "./utils/socket/interface";
 import Authentication from "./auth/token.validation";
+import { routerMatch } from "./utils/match/match.routes";
 
 dotenv.config();
 
 const PORT = 81;
 const oneDay = 1000 * 60 * 60 * 24;
 const app = express();
-app.use(
-  cors({ origin: "*", methods: "GET,HEAD,PUT,PATCH,POST,DELETE", preflightContinue: false, optionsSuccessStatus: 204 })
-);
+app.use(cors({ origin: "*", methods: "GET,HEAD,PUT,PATCH,POST,DELETE", preflightContinue: false, optionsSuccessStatus: 204 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(authMiddleware);
@@ -56,6 +55,7 @@ app.get("/setcookie", (req, res) => {
 
 app.use("/client", routerClient);
 app.use("/rating", routerRating);
+app.use("/match", routerMatch);
 app.use("/message", routerMsg);
 app.use("/passions", routerPassions);
 app.use("/community", routerCommunity);

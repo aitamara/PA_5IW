@@ -1,9 +1,10 @@
 import Places from "./Places";
 import { Gender } from "../../constants/Gender";
 import { Here } from "../../constants/Here";
-import ClientAuth from "./ClientAuth";
+import ClientAuth from "./UserAuth";
 
 export default class Client {
+  private id: number;
   private lastname: string;
   private firstname: string;
   private photo: string;
@@ -13,12 +14,11 @@ export default class Client {
   private city: string;
   private zipcode: string;
   private gender: Gender = Gender.MASC;
-  private here_for: Array<Here>;  
+  private here_for: Array<Here>;
   private interested_by: Array<Gender> = [];
-  private id: number;
-  private user_id: number;
 
   constructor(
+    id: number,
     lastname: string,
     firstname: string,
     photo: string,
@@ -29,10 +29,9 @@ export default class Client {
     zipcode: string,
     gender: Gender,
     here_for: Array<Here>,
-    interested_by: Array<Gender>,
-    user_id: number,
-    id?: number       
+    interested_by: Array<Gender>
   ) {
+    this.id = id;
     this.lastname = lastname;
     this.firstname = firstname;
     this.photo = photo;
@@ -44,8 +43,6 @@ export default class Client {
     this.gender = gender;
     this.here_for = here_for;
     this.interested_by = interested_by;
-    this.user_id = user_id;
-    if (id) this.id = id;
   }
 
   public get getFirstName(): string {
@@ -92,10 +89,6 @@ export default class Client {
     return this.interested_by;
   }
 
-  public get getUserId() {
-    return this.user_id;
-  }
-
   public get getId() {
     return this.id;
   }
@@ -108,14 +101,5 @@ export default class Client {
     let places: Array<Places> = [];
     //faire un ronds autour et trouver les places les plus proches
     return places;
-  }
-
-  public userWithoutPwd(): ClientAuth {
-    return new ClientAuth(
-      this.email,
-      this.password,
-      this.role,
-      this.getId
-    );
   }
 }

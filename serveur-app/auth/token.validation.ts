@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import ClientAuth from "serveur-app/utils/entity/ClientAuth";
+import ClientAuth from "serveur-app/utils/entity/UserAuth";
 
 export default class Authentication {
   static TOKEN = process.env.TOKEN || "TEST_TOKEN";

@@ -1,6 +1,6 @@
 import Model from "../../model/Model";
 import Client from "../entity/Client";
-import ClientAuth from "../entity/ClientAuth";
+import ClientAuth from "../entity/UserAuth";
 import Community from "../entity/Community";
 
 export default class CommunityModel extends Model {

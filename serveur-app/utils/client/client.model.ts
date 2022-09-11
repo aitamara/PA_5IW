@@ -1,37 +1,10 @@
 import Model from "../../model/Model";
 import Client from "../entity/Client";
+import ClientAuth from "../entity/UserAuth";
 
 export default class ClientModel extends Model {
   private table: string = "user_client";
   private model = new Model();
-
-  /**
-   *
-   * @param client_email
-   * @param client_password
-   *
-   * @returns
-   */
-  authenticate = async (client_email: string, client_password: string) => {
-    try {
-      let arrClient: Array<Client> = [],
-        client: Client;
-      client_password = this.model.hashIt(client_password);
-      let { rows } = await this.model.dbClient.query(`SELECT * FROM public.user_auth WHERE email = $1 AND password = $2`, [client_email, client_password]);
-      if (rows.length > 0) {
-        rows.forEach((e) => {
-          client = new Client(e.lastname, e.firstname, e.date_of_birth, e.gender, e.intrested_by, e.mail, e.here_for, e.gender, e.interested_by, e.password);
-          arrClient.push(client);
-        });
-        return { success: true, message: "Utilisateur connecté", data: arrClient };
-      } else {
-        return { success: false, message: "Utilisateur non trouvé", data: [client_email, client_password] };
-      }
-    } catch (err) {
-      console.error(err);
-      return { success: false, message: err, data: [] };
-    }
-  };
 
   /**
    * Récupération d'un client à l'aide de l'id
@@ -45,8 +18,8 @@ export default class ClientModel extends Model {
         client: Client,
         { rows } = await this.model.dbClient.query(`SELECT * FROM public.${this.table} WHERE id = $1`, [client_id]);
       if (rows.length > 0) {
-        rows.forEach((e) => {          
-          client = new Client(e.lastname, e.firstname, e.birthdate, e.address, e.city, e.zipcode, e.email, e.here_for, e.gender, e.interested_by);
+        rows.forEach((e) => {
+          client = new Client(e.id, e.lastname, e.firstname, e.photo, e.birthdate, e.phone, e.adress, e.city, e.zipcode, e.gender, e.here_for, e.intrested_by);
           arrClient.push(client);
         });
         return { success: true, message: "succes", data: arrClient };
@@ -72,7 +45,7 @@ export default class ClientModel extends Model {
         { rows } = await this.model.dbClient.query(`SELECT * FROM public.user_auth WHERE email = $1`, [mail]);
       if (rows.length > 0) {
         rows.forEach((e) => {
-          client = new Client(e.lastname, e.firstname, e.date_of_birth, e.gender, e.intrested_by, e.email, e.here_for, e.gender, e.interested_by, e.password);
+          client = new Client(e.id, e.lastname, e.firstname, e.photo, e.birthdate, e.phone, e.adress, e.city, e.zipcode, e.gender, e.here_for, e.intrested_by);
           arrClient.push(client);
         });
         return { success: true, message: "succes", data: arrClient };

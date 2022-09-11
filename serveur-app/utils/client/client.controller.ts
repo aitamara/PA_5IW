@@ -90,8 +90,8 @@ export default class ClientController extends Controller {
     let message: string = "Bad request";
     let response: QueryResponse = { error: true, message: message, data: [] };
 
-    if (Object.keys(req.params).length > 0) {
-      let dataIpt: Array<Verification> = [{ label: "id", type: "number" }];
+    if (Object.keys(req.body).length > 0) {
+      let dataIpt: Array<Verification> = [{ label: "id_client", type: "number" }];
       let listError = this.verifSecure(dataIpt, req.body);
 
       if (listError.length > 0) {
@@ -101,7 +101,7 @@ export default class ClientController extends Controller {
         try {
           code = 200;
           message = "Client inexistant";
-          let data = await this.mdl.getClientById(+req.params.client_id);
+          let data = await this.mdl.getClientById(+req.body.id_client);
           if (data.data.length > 0) {
             message = "Client récupéré";
             response.data.push(data);

@@ -1,9 +1,7 @@
-import Places from "./Places";
 import { Gender } from "../../constants/Gender";
 import { Here } from "../../constants/Here";
-import ClientAuth from "./ClientAuth";
 
-export default class Client {
+export default class ClientAuth {
   private lastname: string;
   private firstname: string;
   private date_of_birth: Date;
@@ -13,7 +11,6 @@ export default class Client {
   private here_for: Array<Here>;
   private gender: Gender = Gender.MASC;
   private interested_by: Array<Gender> = [];
-  private password: string;
   private id: number;
   private longitute: string = "";
   private latittude: string = "";
@@ -28,8 +25,7 @@ export default class Client {
     here_for: Array<Here>,
     gender: Gender,
     interested_by: Array<Gender>,
-    id?: number,
-    password?: string
+    id: number
   ) {
     this.lastname = lastname;
     this.firstname = firstname;
@@ -40,8 +36,7 @@ export default class Client {
     this.here_for = here_for;
     this.gender = gender;
     this.interested_by = interested_by;
-    if (id) this.id = id;
-    if (password) this.password = password;
+    this.id = id;
   }
 
   public get getName(): string {
@@ -82,33 +77,5 @@ export default class Client {
 
   public get getId() {
     return this.id;
-  }
-
-  public set setId(id: number) {
-    this.id = id;
-  }
-  public get getPassword(): string {
-    return this.password;
-  }
-
-  public findPlacesAround(zoneKm: number = 2): Array<Places> {
-    let places: Array<Places> = [];
-    //faire un ronds autour et trouver les places les plus proches
-    return places;
-  }
-
-  public userWithoutPwd(): ClientAuth {
-    return new ClientAuth(
-      this.getName,
-      this.getFirstName,
-      this.getDate_of_birth,
-      this.getAdress,
-      this.getCity,
-      this.getMail,
-      this.getHereFor,
-      this.gender,
-      this.interested_by,
-      this.getId
-    );
   }
 }

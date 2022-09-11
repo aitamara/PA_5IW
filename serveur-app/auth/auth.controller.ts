@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import express from "express";
 import QueryResponse from "../utils/interfaces/query.interface";
 import Verification from "../utils/interfaces/verification.interface";
 import ClientMdl from "../utils/client/client.model";
@@ -6,9 +6,10 @@ import Client from "../utils/entity/Client";
 import Authentication from "./token.validation";
 import ClassCtrl from "../controller/Controller";
 import bcrypt from "bcrypt";
+import ClientAuth from "serveur-app/utils/entity/ClientAuth";
 
 export default class AuthController extends ClassCtrl {
-  connect = async (req: Request, res: Response) => {
+  connect = async (req, res) => {
     let code = 404;
     let response: QueryResponse = { error: true, message: "Bad request", data: [] };
     if (Object.keys(req.body).length > 0) {
@@ -33,8 +34,9 @@ export default class AuthController extends ClassCtrl {
             if (await bcrypt.compare(password, data.data[0].getPassword)) {
               message = "Impossible de se connecter";
               try {
-                let user = data.data[0].userWithoutPwd();
-                message = "Client connecté";
+                let user: ClientAuth = data.data[0].userWithoutPwd();
+                req.message = "Client connecté";
+                req.session = user;
                 response.error = false;
                 response.data.push({ token: Authentication.auth({ mail: mail }) }, user);
                 code = 200;

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import Authentication from "serveur-app/auth/token.validation";
 import Controller from "../../controller/Controller";
 import ClientModel from "../client/client.model";
 import Client from "../entity/Client";
@@ -16,7 +17,7 @@ export default class CommunityController extends Controller {
    * @param req
    * @param res
    */
-  getCommunity = async (req, res) => {
+  public getCommunity = async (req, res) => {
     let code = 400;
     let message: string = "Bad request";
     let response: QueryResponse = { error: true, message: message, data: [] };
@@ -44,7 +45,7 @@ export default class CommunityController extends Controller {
    * @param req
    * @param res
    */
-  public getCommunityByClientId = async (req: Request, res: Response) => {
+  public getCommunityByClientId = async (req, res) => {
     let code = 400;
     let response: QueryResponse = { error: true, message: "Bad request", data: [] };
 
@@ -87,12 +88,15 @@ export default class CommunityController extends Controller {
    * @param req
    * @param res
    */
-  public getCommunitiyMembers = async (req: Request, res: Response) => {
+  public getCommunitiyMembers = async (req, res) => {
     let code = 400;
     let response: QueryResponse = { error: true, message: "Bad request", data: [] };
 
     if (Object.keys(req.params).length > 0) {
-      let dataIpt: Array<Verification> = [{ label: "id_community", type: "number" }];
+      let dataIpt: Array<Verification> = [
+        { label: "id_pro", type: "number" },
+        { label: "id_client", type: "number" },
+      ];
       let listError = this.verifSecure(dataIpt, req.body);
 
       if (listError.length > 0) {
@@ -102,7 +106,7 @@ export default class CommunityController extends Controller {
         try {
           code = 200;
           response.message = "Aucun membres";
-          let data = await this.mdl.getCommunitiyMembers(+req.params.id_community);
+          let data = await this.mdl.getCommunitiyMembers(+req.params.id_community, req.session.user);
           if (data.success) {
             if (data.data.length > 0) {
               response.message = "Membres récupérés";
@@ -125,7 +129,7 @@ export default class CommunityController extends Controller {
    * @param req
    * @param res
    */
-  public addClientToCommunity = async (req: Request, res: Response) => {
+  public addClientToCommunity = async (req, res) => {
     let code = 400;
     let response: QueryResponse = { error: true, message: "Bad request", data: [] };
 
@@ -190,7 +194,7 @@ export default class CommunityController extends Controller {
    * @param req
    * @param res
    */
-  public leaveCommunity = async (req: Request, res: Response) => {
+  public leaveCommunity = async (req, res) => {
     let code = 400;
     let response: QueryResponse = { error: true, message: "Bad request", data: [] };
 

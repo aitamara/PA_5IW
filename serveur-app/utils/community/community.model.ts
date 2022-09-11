@@ -1,5 +1,6 @@
 import Model from "../../model/Model";
 import Client from "../entity/Client";
+import ClientAuth from "../entity/ClientAuth";
 import Community from "../entity/Community";
 
 export default class CommunityModel extends Model {
@@ -77,9 +78,9 @@ export default class CommunityModel extends Model {
    *
    * @returns
    */
-  public getCommunitiyMembers = async (id_community: number) => {
+  public getCommunitiyMembers = async (id_pro: number, client: ClientAuth) => {
     try {
-      let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table_with_user} WHERE id_community = $1`, [id_community]);
+      let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table_with_user} WHERE id_pro = $1`, [id_pro]);
       if (rows.length > 0) {
         return { success: true, message: "succes", data: rows };
       } else {

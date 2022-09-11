@@ -6,7 +6,7 @@ const routerClient = Router();
 const clientCtl = new ClientController();
 
 routerClient.post("/authenticate", clientCtl.authenticate); //authentification d'un client
-routerClient.post("/getClientById/:client_id", clientCtl.getClientById); //récupération d'un client
+routerClient.post("/getClientById", clientCtl.getClientById); //récupération d'un client
 routerClient.post("/register", clientCtl.registerClient); //enregistrement d'un compte client
 routerClient.post("/update", clientCtl.registerClient); //modification d'un compte client
 routerClient.delete("/delete", clientCtl.registerClient); //suppression d'un compte client

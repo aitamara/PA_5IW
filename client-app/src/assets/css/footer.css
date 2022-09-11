@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+*
+{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+  	font-family: 'Poppins', sans-serif;
+}
+body
+{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	min-height: 100vh;
+	flex-direction: column;
+	background: #ede7f6;
+}
+footer
+{
+	position: relative;
+	width: 100%;
+	height: auto;
+	padding: 50px 100px;
+	background: #111;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+footer .container
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.sec
+{
+	margin-right: 30px;
+}
+.sec.aboutus
+{
+	width: 40%;
+}
+.sec h2
+{
+	position: relative;
+	color: #fff;
+	font-weight: 500;
+	margin-bottom: 15px;
+}
+.sec h2:before
+{
+	content: '';
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	width: 50px;
+	height: 2px;
+	background: #2196f3;
+}
+.sec p
+{
+	color: #999;
+}
+
+.sec.quicklinks
+{
+	position: relative;
+	width: 25%;
+}
+.sec.quicklinks ul li
+{
+	list-style: none;
+}
+.sec.quicklinks ul li a
+{
+	color: #999;
+	text-decoration: none;
+	margin-bottom: 10px;
+	display: inline-block;
+}
+.sec.quicklinks ul li a:hover
+{
+	color: #fff;
+}
+.sec.contact
+{
+	width: calc(35% - 60px);
+	margin-right: 0;
+}
+.sec.contact .info
+{
+	position: relative;
+}
+.sec.contact .info li
+{
+	display: flex;
+	margin-bottom: 16px;
+}
+.sec.contact .info li span:nth-child(1)
+{
+	color: #fff;
+	font-size: 20px;
+	margin-right: 10px;
+}
+.sec.contact .info li a
+{
+	color: #999;
+	text-decoration: none;
+}
+.sec.contact .info li a:hover
+{
+	color: #fff;
+}
+
+
+.copyrightText
+{
+	width: 100%;
+	background: #181818;
+	padding: 8px 100px;
+	text-align: center;
+	color: #999;
+}
+
+@media (max-width: 991px)
+{
+	.sec.aboutus,
+	.sec.quicklinks,
+	.sec.contact
+	{
+		width: 100%;
+		margin-bottom: 40px;
+	}
+	.sec.contact
+	{
+		margin-bottom: 0px;
+	}
+	footer
+	{
+		padding: 40px;
+	}
+	.copyrightText
+	{
+		padding: 5px 40px;
+	}
+}

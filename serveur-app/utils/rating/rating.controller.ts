@@ -97,6 +97,7 @@ export default class RatingController extends Controller {
           let data = await this.mdl.getRates(req.body.rate_id);
           if (data.data.length > 0 && data.success) {
             code = 200;
+            /* let user: Client = req.session; */
             let { mark, text, pro_id, client_id } = data.data[0];
             let rate = new Rating(mark, text, pro_id, client_id);
             response.message = "Impossible de supprimer l'avis";

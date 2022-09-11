@@ -11,7 +11,7 @@ import { routerPassions } from "./utils/passions/passions.routes";
 import authMiddleware from "./middleware/auth";
 import authRoute from "./auth/auth.routes";
 import io from "socket.io";
-import { cookieParser } from "cookie-parser";
+import cookieParser from "cookie-parser";
 import { sessions } from "express-session";
 import { ClientToServerEvents, InterServerEvents, ServerToClientEvents, SocketData } from "./utils/socket/interface";
 import Authentication from "./auth/token.validation";
@@ -30,7 +30,7 @@ app.use(morgan(":method :url :status :res[content-length] - :response-time ms"))
 
 app.use("/auth", authRoute);
 
-/* app.use(cookieParser());
+app.use(cookieParser());
 //a get route for adding a cookie
 app.get("/setcookie", (req, res) => {
   res.cookie(`Cookie token name`, `encrypted cookie string Value`, {
@@ -42,7 +42,7 @@ app.get("/setcookie", (req, res) => {
     sameSite: "lax",
   });
   res.send("Cookie have been saved successfully");
-}); */
+});
 
 /* app.use(
   sessions({

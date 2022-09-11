@@ -22,11 +22,11 @@ export default class RatingController extends Controller {
       let dataIpt: Array<Verification> = [
         { label: "mark", type: "number" },
         { label: "text", type: "text" },
-        { label: "id_pro", type: "number" },
-        { label: "id_client", type: "number" },
+        { label: "pro_id", type: "number" },
+        { label: "client_id", type: "number" },
       ];
       let listError = this.verifSecure(dataIpt, req.body);
-      let { mark, text, id_pro, id_client } = req.body;
+      let { mark, text, pro_id, client_id } = req.body;
 
       if (listError.length > 0) {
         response.message = "Erreur";
@@ -43,11 +43,11 @@ export default class RatingController extends Controller {
           try {
             await Promise.all([
               //2. récupérer pro
-              mdl2.getProById(id_pro).catch((error) => {
+              mdl2.getProById(pro_id).catch((error) => {
                 res.status(400).send(error);
               }),
               //3. récuperer client
-              mdl3.getClientById(id_client).catch((error) => {
+              mdl3.getClientById(client_id).catch((error) => {
                 res.status(400).send(error);
               }),
             ]).then((res) => {
@@ -86,7 +86,7 @@ export default class RatingController extends Controller {
     let response: QueryResponse = { error: true, message: "Bad request", data: [] };
 
     if (Object.keys(req.params).length > 0) {
-      let dataIpt: Array<Verification> = [{ label: "id_rate", type: "number" }];
+      let dataIpt: Array<Verification> = [{ label: "rate_id", type: "number" }];
       let listError = this.verifSecure(dataIpt, req.body);
 
       if (listError.length > 0) {
@@ -94,11 +94,11 @@ export default class RatingController extends Controller {
         response.data.push(listError);
       } else {
         try {
-          let data = await this.mdl.getRates(req.body.iid_rated);
+          let data = await this.mdl.getRates(req.body.rate_id);
           if (data.data.length > 0 && data.success) {
             code = 200;
-            let { mark, text, id_pro, id_client } = data.data[0];
-            let rate = new Rating(mark, text, id_pro, id_client);
+            let { mark, text, pro_id, client_id } = data.data[0];
+            let rate = new Rating(mark, text, pro_id, client_id);
             response.message = "Impossible de supprimer l'avis";
             data = await this.mdl.deleteRate(rate);
             if (data.success) {

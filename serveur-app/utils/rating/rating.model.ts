@@ -9,12 +9,12 @@ export default class RatingModel extends Model {
   /**
    * Récupération des notes d'un pro
    *
-   * @param id
+   * @param pro
    * @returns
    */
-  public getRates = async (pro: Pro) => {
+  public getRates = async (rate_id: number) => {
     try {
-      let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table} WHERE id_pro = $1`, [pro.getId]);
+      let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table} WHERE id_rate = $1`, [rate_id]);
       if (rows.length > 0) {
         return { success: true, message: "Avis trouvé", data: rows };
       } else {
@@ -36,7 +36,7 @@ export default class RatingModel extends Model {
     try {
       let { rows } = await this.model.dbClient.query(`INSERT INTO ${this.table} WHERE id = $1`, [rating.getId]);
       if (rows.length > 0) {
-        return { success: true, message: "Avis ajouté", data: rows };
+        return { success: true, message: "Avis ajouté", data: [rating] };
       } else {
         return { success: false, message: "Impossible d'ajouté l'avis", data: [] };
       }

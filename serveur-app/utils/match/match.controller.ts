@@ -20,7 +20,7 @@ export default class MatchController extends Controller {
     let response: QueryResponse = { error: true, message: "Bad request", data: [] };
 
     if (Object.keys(req.params).length > 0) {
-      let dataIpt: Array<Verification> = [{ label: "id_client", type: "number" }];
+      let dataIpt: Array<Verification> = [{ label: "client_id", type: "number" }];
       let listError = this.verifSecure(dataIpt, req.body);
 
       if (listError.length > 0) {
@@ -32,7 +32,7 @@ export default class MatchController extends Controller {
           response.message = "Aucun match trouvés";
           let data;
           let cltMdl = new ClientModel();
-          let user = await cltMdl.getClientById(+req.body.id_client);
+          let user = await cltMdl.getClientById(+req.body.client_id);
           if (user.data.length > 0 && user.data[0] instanceof Client) {
             data = await this.mdl.getMatchByClientId(user.data[0]);
           }

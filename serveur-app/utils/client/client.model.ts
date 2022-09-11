@@ -1,6 +1,5 @@
 import Model from "../../model/Model";
 import Client from "../entity/Client";
-import ClientAuth from "../entity/UserAuth";
 
 export default class ClientModel extends Model {
   private table: string = "user_client";
@@ -58,12 +57,17 @@ export default class ClientModel extends Model {
     }
   };
 
+  /**
+   *
+   * @param id_community
+   * @returns
+   */
   getClientsOfCommunity = async (id_community: number) => {
     try {
       //table de jonction entre community et user
       let { rows } = await this.model.dbClient.query(`SELECT * FROM user_comminty WHERE id_community = $1`, [id_community]);
       if (rows.length > 0) {
-        return { success: true, message: "succes", data: rows };
+        return { success: true, message: "Utilisateur(s) trouvé(s)", data: rows };
       } else {
         return { success: false, message: "Aucun utilisateurs trouvés", data: [] };
       }
@@ -72,20 +76,6 @@ export default class ClientModel extends Model {
       return { success: false, message: err, data: [] };
     }
   };
-
-  /* getClientByUserName = async (client_username) => {
-    try {
-      let { rows } = await this.model.dbClient.query(`SELECT * FROM public.user_client WHERE lastname LIKE $1`, [client_username]);
-      if (rows.length > 0) {
-        return { code: 200, message: "success", data: rows };
-      } else {
-        return { code: 404, message: "Utilisateur non trouvé", data: [] };
-      }
-    } catch (err) {
-      console.error(err);
-      return { code: 500, message: err, data: [] };
-    }
-  }; */
 
   //a retester suite aux modifs
   registerAuthDetails = async (body_params) => {

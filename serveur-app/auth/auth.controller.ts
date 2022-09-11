@@ -7,7 +7,13 @@ import ClassCtrl from "../controller/Controller";
 import UserAuth from "../utils/entity/UserAuth";
 
 export default class AuthController extends ClassCtrl {
-  connect = async (req, res) => {
+  /**
+   * Connexion d'un utilisateur
+   *
+   * @param req
+   * @param res
+   */
+  public connect = async (req, res) => {
     let code = 404;
     let response: QueryResponse = { error: true, message: "Bad request", data: [] };
     if (Object.keys(req.body).length > 0) {

@@ -56,7 +56,7 @@ export default class CommunityModel extends Model {
    *
    * @returns
    */
-  public getCommunityByClientId = async (id_community: number) => {
+  /* public getCommunityByClientId = async (id_community: number) => {
     try {
       let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table_with_user} WHERE id_community = $1`, [id_community]);
       if (rows.length > 0) {
@@ -68,7 +68,7 @@ export default class CommunityModel extends Model {
       console.error(err);
       return { success: false, message: err, data: [] };
     }
-  };
+  }; */
 
   /**
    * Récupération des membres d'une communauté

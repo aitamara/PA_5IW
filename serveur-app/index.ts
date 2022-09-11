@@ -9,6 +9,7 @@ import { routerMsg } from "./utils/chat/chatMsg.routes";
 import { routerPassions } from "./utils/passions/passions.routes";
 import authMiddleware from "./middleware/auth";
 import authRoute from "./auth/auth.routes";
+import io from "socket.io";
 
 dotenv.config();
 
@@ -26,6 +27,11 @@ app.use("/rating", routerRating);
 app.use("/message", routerMsg);
 app.use("/passions", routerPassions);
 app.use("/community", routerCommunity);
+
+/* let test = new io.Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>();
+test.on("connection", (socket) => {
+  console.log("test");
+}); */
 
 app.use("/dist", express.static(path.join(process.cwd(), "dist/")));
 app.use(express.static(path.join(process.cwd(), "public/")));

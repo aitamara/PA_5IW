@@ -1,7 +1,6 @@
 import Controller from "../../controller/Controller";
 import ClientModel from "../client/client.model";
 import Client from "../entity/Client";
-import Passion from "../entity/Passion";
 import QueryResponse from "../interfaces/query.interface";
 import Verification from "../interfaces/verification.interface";
 import PassionsModel from "./passions.model";

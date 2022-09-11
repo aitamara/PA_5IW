@@ -13,7 +13,7 @@ export default class Client {
   private city: string;
   private zipcode: string;
   private gender: Gender = Gender.MASC;
-  private here_for: Array<Here>;
+  private here_for: String;
   private interested_by: Array<Gender> = [];
 
   constructor(
@@ -27,7 +27,7 @@ export default class Client {
     city: string,
     zipcode: string,
     gender: Gender,
-    here_for: Array<Here>,
+    here_for: String,
     interested_by: Array<Gender>
   ) {
     this.id = id;
@@ -76,7 +76,7 @@ export default class Client {
     return this.zipcode;
   }
 
-  public get getHereFor(): Here[] {
+  public get getHereFor(): String {
     return this.here_for;
   }
 

@@ -11,7 +11,7 @@ export default class ClientRegister {
   private city: string;
   private zipcode: string;
   private gender: Gender = Gender.MASC;
-  private here_for: Array<Here>;
+  private here_for: String;
   private interested_by: Array<Gender> = [];
   private password: string;
 
@@ -25,7 +25,7 @@ export default class ClientRegister {
     city: string,
     zipcode: string,
     gender: Gender,
-    here_for: Array<Here>,
+    here_for: String,
     interested_by: Array<Gender>,
     password: string
   ) {
@@ -75,7 +75,7 @@ export default class ClientRegister {
     return this.zipcode;
   }
 
-  public get getHereFor(): Here[] {
+  public get getHereFor(): String {
     return this.here_for;
   }
 

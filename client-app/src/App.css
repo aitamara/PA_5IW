@@ -1,0 +1,10 @@
+main {
+  display: flex;
+  flex-direction: column;
+  width: -webkit-fill-available;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  top: 0;
+  position: absolute;
+}

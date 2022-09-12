@@ -31,7 +31,7 @@ class Index extends React.Component {
                             Tu souhaites participer à un évènement et tu n'aimes pas y aller seul ? Trouves avec Meet&Move le partenaire
                             idéal.
                         </p>
-                        <a href="auth-register.html">Commencer</a>
+                        <a href="/authentification">Commencer</a>
                     </div>
                     <div className="imgBox">
                         <div className="swiper-container">

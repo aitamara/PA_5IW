@@ -20,7 +20,6 @@ export default class AuthController extends ClassCtrl {
       let dataIpt: Array<Verification> = [
         { label: "email", type: "string" },
         { label: "password", type: "string" },
-        { label: "role", type: "string" },
       ];
       let listError = this.verifSecure(dataIpt, req.body);
 
@@ -29,8 +28,8 @@ export default class AuthController extends ClassCtrl {
         response.data.push(listError);
       } else {
         try {
-          let { email, password, role } = req.body;
-          let userAuth = new UserAuth(email, password, role);
+          let { email, password } = req.body;
+          let userAuth = new UserAuth(email, password);
           let mdl = new UserMdl();
           let message: string = "Mot de passe incorrect";
           let data = await mdl.authenticate(userAuth);
@@ -38,9 +37,9 @@ export default class AuthController extends ClassCtrl {
           if (data.success && data.data[0]) {
             message = "Impossible de se connecter";
             try {
-              let user = data.data[0];
+              let user = data.data;
               message = "Client connecté";
-              req.session = user;
+              req.session = {user: user};
               response.error = false;
               response.data.push({ token: Authentication.auth({ email: email }) }, user);
               code = 200;
@@ -57,4 +56,8 @@ export default class AuthController extends ClassCtrl {
       res.status(code).send(response);
     }
   };
+
+  public disconnect = (req, res) => {
+    req.session = ""
+  }
 }

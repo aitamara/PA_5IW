@@ -6,5 +6,10 @@ class ProController extends Controller {
     //let response = await ProModel.getProById(req.params.pro_id);
     //res.json(response);
   };
+
+  getAllPro = async (req, res) => {
+    let response = await ProModel.getAllPro();
+    res.json(response);
+  };
 }
 export default ProController;

@@ -3,12 +3,12 @@ import { roles } from "../../constants/Roles";
 export default class UserAuth {
   private email: string;
   private password: string;
-  private role: roles;
+  private role?: roles;
 
-  constructor(email: string, password: string, role: roles, id?: number) {
+  constructor(email: string, password: string, role?: roles) {
     this.email = email;
     this.password = password;
-    this.role = role;
+    if(role) this.role = role;
   }
 
   public get getEmail() {
@@ -22,12 +22,4 @@ export default class UserAuth {
   public get getRole() {
     return this.role;
   }
-
-  /*   public get getId() {
-    return this.id;
-  }
-
-  public set setId(id: number) {
-    this.id = id;
-  } */
 }

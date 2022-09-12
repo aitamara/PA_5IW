@@ -2,11 +2,12 @@
 import ProController from "./pro.controller";
 import { Router } from "express";
 
-const routerClient = Router();
+const routerPro = Router();
 const proCtl = new ProController();
 
-routerClient.get("/getProById/:pro_id", proCtl.getProById); // récupération d'un pro
-routerClient.post("/update/", proCtl.getProById); // Modification informations d'un pro
-routerClient.delete("/delete/:pro_id", proCtl.getProById); // Suppression d'un pro
+routerPro.get("/getAllPro", proCtl.getAllPro); // récupération d'un pro
+routerPro.get("/getProById/:pro_id", proCtl.getProById); // récupération d'un pro
+routerPro.post("/update/", proCtl.getProById); // Modification informations d'un pro
+routerPro.delete("/delete/:pro_id", proCtl.getProById); // Suppression d'un pro
 
-export { routerClient };
+export { routerPro };

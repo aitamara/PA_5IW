@@ -11,7 +11,7 @@ export default class PropositionsModel extends Model {
    *
    * @param client
    */
-  public getPropositions = async (client: Client, pro: Pro) => {
+  public getPropositions = async (client: Client, pro: number) => {
     try {
         let { rows } = await this.model.dbClient.query(
           `SELECT * 
@@ -23,7 +23,7 @@ export default class PropositionsModel extends Model {
           AND (user_client.intrested_by = $3 OR user_client.intrested_by = 'ALL') 
           AND ($4 = user_client.gender OR $4 = 'ALL')
           AND (user_client.here_for = 'ALL' OR user_client.here_for = $5 OR monHereFor = 'ALL')`,
-          [pro.getId, client.getId, client.getGender, client.getInterested_by, client.getHereFor]
+          [pro, client.getId, client.getGender, client.getInterested_by, client.getHereFor]
         );
         console.log(rows);        
         if (rows.length > 0) {

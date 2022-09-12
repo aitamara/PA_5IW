@@ -4,12 +4,33 @@ import Pro from "../entity/Pro";
 let model = new Model();
 
 class ProModel extends Model {
+  static getAllPro() {
+    throw new Error("Method not implemented.");
+  }
   private table: string = "user_pro";
   private model = new Model();
 
   public getProById = async (pro_id) => {
     try {
       let { rows } = await model.dbClient.query(`SELECT * FROM public.${this.table} WHERE id = $1`, [pro_id]);
+      if (rows.length > 0) {
+        let pro;
+        rows.forEach((e) => {
+          pro = new Pro(e.id, e.lastname, e.firstname, e.proname, e.photo, e.adress, e.city, e.zipcode, e.activated, e.coord_lat, e.coord_long);
+        });
+        return { code: 200, message: "succes", data: [pro] };
+      } else {
+        return { code: 404, message: "Pro non trouvé", data: [] };
+      }
+    } catch (err) {
+      console.error(err);
+      return { code: 500, message: err, data: [] };
+    }
+  };
+
+  public getAllPro = async () => {
+    try {
+      let { rows } = await model.dbClient.query(`SELECT * FROM public.${this.table}`);
       if (rows.length > 0) {
         let pro;
         rows.forEach((e) => {

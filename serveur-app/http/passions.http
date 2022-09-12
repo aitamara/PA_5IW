@@ -146,13 +146,19 @@ content-type: application/json
 
 ###
 # LIST Propositions de Match
-GET http://localhost:81/matchs/propositions
+GET http://localhost:81/propositions/proposition
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NjI5MzYyNzgsImV4cCI6MTY2MzAyMjY3OH0.phKlFNe75yBLHkQf_3zflwwJtvQZcGcpUzp14__TUs0
 content-type: application/json
 
 {
-    "client_id" : 1,
     "pro_id" : 1
 }
+
+###
+# LIST Pro
+POST http://localhost:81/pro/getAllPro
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NjI5NTAyMzgsImV4cCI6MTY2MzAzNjYzOH0.EvUcBqKG73yWIi3Cqs_c38GuR08aELqMp2MFqDbuK7w
+
 
 ###
 # LIST Propositions de Match

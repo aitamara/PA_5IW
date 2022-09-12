@@ -70,10 +70,10 @@ class Map extends React.Component {
         });
 
         map.on("load", () => {
-            console.log(window.location.href.split('&')[1].split('=')[1]);
-            let token = window.location.href.split('&')[0].split('=')[1];
+            //console.log(window.location.href.split('&')[1].split('=')[1]);
+            //let token = window.location.href.split('&')[0].split('=')[1];
             //let id_client = window.location.href.split('&')[0].split('=')[1];
-        
+            /*
             fetch("http://127.0.0.1:81/pro/getAllPro", {
                 headers: {
                     Accept: "application/json",
@@ -88,17 +88,11 @@ class Map extends React.Component {
             .then((response) => {
                 response.json().then(function (json) {
                     console.log(json);
-                /*
-                client = json.data[0].data[0];
-                age = new Date(Date.now() - new Date(client.birthdate).getTime()).getUTCFullYear() - 1970;
-
-                $('#nameAge').text(client.firstname+", "+age+" ans");
-                $('#ville').text(client.city);*/
                 });
             })
             .catch((error) => {
-                /*log.catch(error);*/
             });
+            */
             map.addSource("points", {
                 type: "geojson",
                 data: {
@@ -124,38 +118,6 @@ class Map extends React.Component {
                                 type: "Point",
                                 coordinates: [this.crd.longitude, this.crd.latitude],
                             },
-                        },
-                        {
-                            type: "Feature",
-                            properties: {
-                                'description':
-                                    `<div class="map-popup">
-                                        <h2 class="h2-popup">Nom établissement</h2>
-                                        <span class="span-popup"
-                                        >132 rue de j'ai pas d'idée<br />
-                                        75000 Paris</span
-                                        >
-                                        <div class="action-popup">
-                                        <a class="action-button-voir-popup" href="community/pro/1">Voir</a>
-                                        </div>
-                                    </div>`,
-                                'icon': 'theatre-15'
-                            },
-                            geometry: {
-                                type: "Point",
-                                coordinates: [48.889621, 2.446883],
-                            },
-                        },
-                        {
-                            "type": "Feature",
-                            "properties": {
-                              "title": "Burnham Park",
-                              "description": "A lakefront park on Chicago's south side"
-                            },
-                            "geometry": {
-                              "coordinates": [48.883047, 2.437153],
-                              "type": "Point"
-                            }
                         }
                     ],
                 },

@@ -39,7 +39,6 @@ class Authentication extends React.Component {
         btnConnexion.addEventListener("click", (e) => {
             var email = document.getElementById("emailConnexion").value;
             var passwrd = document.getElementById("passwordConnexion").value;
-            console.log(email);
             fetch("http://127.0.0.1:81/auth/connect", {
                 headers: {
                     Accept: "application/json",
@@ -56,7 +55,7 @@ class Authentication extends React.Component {
                     }
                     throw new Error('Something went wrong');
                 }).then((response) => {
-                    console.log(response.data[1][0].role);
+                    //console.log(response.data[1][0].role);
                     if (response.data[1][0].role == 'client'){
                         window.location.href=`/map?${new URLSearchParams(response.data[0]).toString()}&${new URLSearchParams(response.data[1][0]).toString()}`;
                     }

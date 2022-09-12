@@ -37,7 +37,6 @@ class Authentication extends React.Component {
         });
         let btnConnexion = document.querySelector("#btnConnexion");
         btnConnexion.addEventListener("click", (e) => {
-            console.log("cliqué");
             var email = document.getElementById("emailConnexion").value;
             var passwrd = document.getElementById("passwordConnexion").value;
             console.log(email);

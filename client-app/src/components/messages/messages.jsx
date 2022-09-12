@@ -39,6 +39,20 @@ class Messages extends React.Component {
             <div className="container">
                 <Menu />
                 <div class="main">
+                    <div className="topbar">
+                        <div className="toggle">
+                            <ion-icon name="menu-outline"></ion-icon>
+                        </div>
+                        <div className="search">
+                            <label>
+                                <input type="text" placeholder="Rechercher" />
+                                <ion-icon name="search-outline"></ion-icon>
+                            </label>
+                        </div>
+                        <div className="user">
+                            <img src="assets/images/user.jpg" />
+                        </div>
+                    </div>
                     <div className="chat-container">
                         <div className="leftSide">
                             <div className="search_chat">

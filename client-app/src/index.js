@@ -9,6 +9,8 @@ import Authentication from './components/authentication/authentication';
 import Panel from './components/panel/panel';
 import Messages from './components/messages/messages';
 import Map from './components/map/map';
+import ProfilePro from './components/profile-entreprise/profile-entreprise';
+import Match from './components/match/match';
 import './App.css';
 
 const root = ReactDOM.createRoot(document.querySelector('main'));
@@ -21,6 +23,8 @@ root.render(
         <Route path="/panel" element={<Panel />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/map" element={<Map />} />
+        <Route path="/profile-pro" element={<ProfilePro />} />
+        <Route path="/match" element={<Match />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -18,7 +18,7 @@ class Menu extends React.Component {
                         <span className="icon">
                             <ion-icon name="home-outline" />
                         </span>
-                        <span className="title">Tableau de bord</span>
+                        <span className="title">Map</span>
                     </a>
                 </li>
                 <li className="hovered">

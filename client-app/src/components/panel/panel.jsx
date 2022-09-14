@@ -53,7 +53,7 @@ class Panel extends React.Component {
                         </div>
                         <div className="card">
                             <div>
-                                <div className="numbers">$7,842</div>
+                                <div className="numbers">€ 237</div>
                                 <div className="cardName">Gain mensuel</div>
                             </div>
                             <div className="iconBx">

@@ -27,7 +27,7 @@ class Panel extends React.Component {
                         <div className="card">
                             <div>
                                 <div className="numbers">1,504</div>
-                                <div className="cardName">Daily Views</div>
+                                <div className="cardName">Visites du profil</div>
                             </div>
                             <div className="iconBx">
                                 <ion-icon name="eye-outline"></ion-icon>
@@ -36,7 +36,7 @@ class Panel extends React.Component {
                         <div className="card">
                             <div>
                                 <div className="numbers">80</div>
-                                <div className="cardName">Sales</div>
+                                <div className="cardName">Ventes</div>
                             </div>
                             <div className="iconBx">
                                 <ion-icon name="cart-outline"></ion-icon>
@@ -45,7 +45,7 @@ class Panel extends React.Component {
                         <div className="card">
                             <div>
                                 <div className="numbers">284</div>
-                                <div className="cardName">Comments</div>
+                                <div className="cardName">Avis</div>
                             </div>
                             <div className="iconBx">
                                 <ion-icon name="chatbubbles-outline"></ion-icon>
@@ -54,7 +54,7 @@ class Panel extends React.Component {
                         <div className="card">
                             <div>
                                 <div className="numbers">$7,842</div>
-                                <div className="cardName">Earning</div>
+                                <div className="cardName">Gain mensuel</div>
                             </div>
                             <div className="iconBx">
                                 <ion-icon name="cash-outline"></ion-icon>
@@ -73,91 +73,35 @@ class Panel extends React.Component {
                     <div className="details">
                         <div className="recentOrders">
                             <div className="cardHeader">
-                                <h2>Recent Orders</h2>
-                                <a href="#" className="btn">View All</a>
+                                <h2>Situations à régler</h2>
+                                <a href="#" className="btn">Voir la liste</a>
                             </div>
                             <table>
                                 <thead>
                                     <tr>
-                                        <td>Name</td>
-                                        <td>Price</td>
-                                        <td>Payment</td>
+                                        <td>Nom</td>
                                         <td>Status</td>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Star Refrigerator</td>
-                                        <td>$1200</td>
-                                        <td>Paid</td>
-                                        <td><span className="status delivered">Delivered</span></td>
+                                        <td>Samy</td>
+                                        <td><span className="status delivered">Débloqué(e)</span></td>
                                     </tr>
                                     <tr>
-                                        <td>Window Coolers</td>
-                                        <td>$110</td>
-                                        <td>Due</td>
-                                        <td><span className="status pending">Pending</span></td>
+                                        <td>Pierre</td>
+                                        <td><span className="status pending">Signalé(e)</span></td>
                                     </tr>
                                     <tr>
-                                        <td>Speakers</td>
-                                        <td>$620</td>
-                                        <td>Paid</td>
-                                        <td><span className="status return">Return</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Hp Laptop</td>
-                                        <td>$110</td>
-                                        <td>Due</td>
-                                        <td><span className="status inprogress">In Progress</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Apple Watch</td>
-                                        <td>$1200</td>
-                                        <td>Paid</td>
-                                        <td><span className="status delivered">Delivered</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Wall Fan</td>
-                                        <td>$110</td>
-                                        <td>Paid</td>
-                                        <td><span className="status pending">Pending</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Adidas Shoes</td>
-                                        <td>$620</td>
-                                        <td>Paid</td>
-                                        <td><span className="status return">Return</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Denim Shirts</td>
-                                        <td>$110</td>
-                                        <td>Due</td>
-                                        <td><span className="status inprogress">In Progress</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Casual Shoes</td>
-                                        <td>$575</td>
-                                        <td>Paid</td>
-                                        <td><span className="status pending">Pending</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Wall Fan</td>
-                                        <td>$110</td>
-                                        <td>Paid</td>
-                                        <td><span className="status pending">Pending</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Denim Shirts</td>
-                                        <td>$110</td>
-                                        <td>Due</td>
-                                        <td><span className="status inprogress">In Progress</span></td>
+                                        <td>Marie</td>
+                                        <td><span className="status return">Bloqué(e) avec signalement</span></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div className="recentCustomers">
                             <div className="cardHeader">
-                                <h2>Recent Customers</h2>
+                                <h2>Membres de votre communauté</h2>
                             </div>
                             <table>
                                 <thead>
@@ -166,7 +110,7 @@ class Panel extends React.Component {
                                             <div className="imgBx"><img src="assets/images/img1.jpg" /></div>
                                         </td>
                                         <td>
-                                            <h4>David<br /><span>Italy</span></h4>
+                                            <h4>David<br /><span>20 ans</span></h4>
                                         </td>
                                     </tr>
                                 </thead>
@@ -176,7 +120,7 @@ class Panel extends React.Component {
                                             <div className="imgBx"><img src="assets/images/img2.jpg" /></div>
                                         </td>
                                         <td>
-                                            <h4>Muhammad<br /><span>India</span></h4>
+                                            <h4>Muhammad<br /><span>26 ans</span></h4>
                                         </td>
                                     </tr>
                                     <tr>
@@ -184,7 +128,7 @@ class Panel extends React.Component {
                                             <div className="imgBx"><img src="assets/images/img3.jpg" /></div>
                                         </td>
                                         <td>
-                                            <h4>Amelia<br /><span>France</span></h4>
+                                            <h4>Amelia<br /><span>18 ans</span></h4>
                                         </td>
                                     </tr>
                                     <tr>
@@ -192,7 +136,7 @@ class Panel extends React.Component {
                                             <div className="imgBx"><img src="assets/images/img4.jpg" /></div>
                                         </td>
                                         <td>
-                                            <h4>Olivia<br /><span>USA</span></h4>
+                                            <h4>Olivia<br /><span>45 ans</span></h4>
                                         </td>
                                     </tr>
                                     <tr>
@@ -200,7 +144,7 @@ class Panel extends React.Component {
                                             <div className="imgBx"><img src="assets/images/img5.jpg" /></div>
                                         </td>
                                         <td>
-                                            <h4>Amit<br /><span>Japan</span></h4>
+                                            <h4>Amit<br /><span>36 ans</span></h4>
                                         </td>
                                     </tr>
                                     <tr>
@@ -208,7 +152,7 @@ class Panel extends React.Component {
                                             <div className="imgBx"><img src="assets/images/img6.jpg" /></div>
                                         </td>
                                         <td>
-                                            <h4>Ashraf<br /><span>India</span></h4>
+                                            <h4>Ashraf<br /><span>19 ans</span></h4>
                                         </td>
                                     </tr>
                                     <tr>
@@ -216,7 +160,7 @@ class Panel extends React.Component {
                                             <div className="imgBx"><img src="assets/images/img7.jpg" /></div>
                                         </td>
                                         <td>
-                                            <h4>Diana<br /><span>Malaysia</span></h4>
+                                            <h4>Diana<br /><span>51 ans</span></h4>
                                         </td>
                                     </tr>
                                     <tr>
@@ -224,7 +168,7 @@ class Panel extends React.Component {
                                             <div className="imgBx"><img src="assets/images/img8.jpg" /></div>
                                         </td>
                                         <td>
-                                            <h4>Amit<br /><span>India</span></h4>
+                                            <h4>Amit<br /><span>22 ans</span></h4>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -10,6 +10,7 @@ import Panel from './components/panel/panel';
 import Messages from './components/messages/messages';
 import Map from './components/map/map';
 import ProfilePro from './components/profile-entreprise/profile-entreprise';
+import ProfileClient from './components/profile-client/profile-client';
 import Match from './components/match/match';
 import './App.css';
 
@@ -24,6 +25,7 @@ root.render(
         <Route path="/messages" element={<Messages />} />
         <Route path="/map" element={<Map />} />
         <Route path="/profile-pro" element={<ProfilePro />} />
+        <Route path="/profile-client" element={<ProfileClient />} />
         <Route path="/match" element={<Match />} />
       </Routes>
     </BrowserRouter>

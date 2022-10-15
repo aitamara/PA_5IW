@@ -2,12 +2,12 @@ import React from 'react';
 import '../../assets/css/rechercher-matchs.css'
 import Menu from '../menu/menu';
 
-class Match extends React.Component {
+class Matchs extends React.Component {
     constructor(props) { super(props) }
     render() {
         return (
             <div className="container">
-                <Menu />
+                <Menu hovered={"match"}/>
                 <div className="main">
                     <div className="topbar">
                         <div className="toggle">
@@ -47,4 +47,4 @@ class Match extends React.Component {
             </div>)
     }
 }
-export default Match;
+export default Matchs;

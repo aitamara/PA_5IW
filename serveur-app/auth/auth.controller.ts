@@ -14,7 +14,7 @@ export default class AuthController extends ClassCtrl {
    * @param res
    */
   public connect = async (req, res) => {
-    let code = 404;
+    let code = 500;
     let response: QueryResponse = { error: true, message: "Bad request", data: [] };
     if (Object.keys(req.body).length > 0) {
       let dataIpt: Array<Verification> = [
@@ -39,7 +39,7 @@ export default class AuthController extends ClassCtrl {
             try {
               let user = data.data;
               message = "Client connecté";
-              req.session = {user: user};
+              req.session = { user: user };
               response.error = false;
               response.data.push({ token: Authentication.auth({ email: email }) }, user);
               code = 200;
@@ -49,7 +49,6 @@ export default class AuthController extends ClassCtrl {
           }
           response.message = message;
         } catch (error) {
-          console.log(error);
           res.status(400).send(error);
         }
       }
@@ -58,6 +57,6 @@ export default class AuthController extends ClassCtrl {
   };
 
   public disconnect = (req, res) => {
-    req.session = ""
-  }
+    req.session = "";
+  };
 }

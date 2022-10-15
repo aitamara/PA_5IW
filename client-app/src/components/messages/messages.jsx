@@ -19,25 +19,25 @@ class Messages extends React.Component {
                 withCredentials: true,
                 credentials: "same-origin",
             })
-            .then((response) => {
-                response.json().then(function (json) {/*
+                .then((response) => {
+                    response.json().then(function (json) {/*
                 client = json.data[0].data[0];
                 age = new Date(Date.now() - new Date(client.birthdate).getTime()).getUTCFullYear() - 1970;
 
                 $('#nameAge').text(client.firstname+", "+age+" ans");
                 $('#ville').text(client.city);*/
+                    });
+                })
+                .catch((error) => {
+                    /*log.catch(error);*/
                 });
-            })
-            .catch((error) => {
-                /*log.catch(error);*/
-            });
         });
     }
 
     render() {
         return (
             <div className="container">
-                <Menu />
+                <Menu hovered={"messages"} />
                 <div class="main">
                     <div className="topbar">
                         <div className="toggle">

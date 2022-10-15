@@ -6,12 +6,12 @@ import {
 import reportWebVitals from './reportWebVitals';
 import Index from './components/index/index';
 import Authentication from './components/authentication/authentication';
-import Panel from './components/panel/panel';
+import HomePro from './components/HomePro/HomePro';
 import Messages from './components/messages/messages';
 import Map from './components/map/map';
 import ProfilePro from './components/profile-entreprise/profile-entreprise';
 import ProfileClient from './components/profile-client/profile-client';
-import Match from './components/match/match';
+import Matchs from './components/matchs/matchs';
 import './App.css';
 
 const root = ReactDOM.createRoot(document.querySelector('main'));
@@ -21,12 +21,12 @@ root.render(
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/authentification" element={<Authentication />} />
-        <Route path="/panel" element={<Panel />} />
+        <Route path="/home/pro" element={<HomePro />} />
+        <Route path="/matchs" element={<Matchs />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/map" element={<Map />} />
         <Route path="/profile-pro" element={<ProfilePro />} />
         <Route path="/profile-client" element={<ProfileClient />} />
-        <Route path="/match" element={<Match />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

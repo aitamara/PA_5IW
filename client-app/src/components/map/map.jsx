@@ -181,7 +181,7 @@ class Map extends React.Component {
     render() {
         return (
             <div className="container">
-                <Menu />
+                <Menu hovered={"map"}/>
                 <div className="main">
                     <div className="topbar">
                         <div className="toggle">

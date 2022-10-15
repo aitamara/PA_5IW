@@ -2,12 +2,12 @@ import React from 'react';
 import '../../assets/css/panel.css'
 import Menu from '../menu/menu';
 
-class Panel extends React.Component {
+class HomePro extends React.Component {
     constructor(props) { super(props) }
     render() {
         return (
             <div className="container">
-                <Menu />
+                <Menu hovered={"panel"}/>
                 <div className="main">
                     <div className="topbar">
                         <div className="toggle">
@@ -179,4 +179,4 @@ class Panel extends React.Component {
             </div>)
     }
 }
-export default Panel;
+export default HomePro;

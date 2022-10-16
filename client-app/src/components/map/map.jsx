@@ -92,6 +92,7 @@ class Map extends React.Component {
             })
             .catch((error) => {
             });
+           console.log(token)
             */
             map.addSource("points", {
                 type: "geojson",
@@ -173,7 +174,6 @@ class Map extends React.Component {
             for (const entry of entries) {
                 console.log(entry);
             }
-            console.log("Size changed");
             map.resize();
         });
         resizeObserver.observe(document.querySelector('#mapGLDIV'));

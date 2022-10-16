@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import morgan from "morgan";
+import session from "express-session";
 import { routerClient } from "./utils/client/client.routes";
 import { routerCommunity } from "./utils/community/community.routes";
 import { routerRating } from "./utils/rating/rating.routes";
@@ -24,37 +25,29 @@ dotenv.config();
 const PORT = 81;
 const oneDay = 1000 * 60 * 60 * 24;
 const app = express();
-app.use(cors({ origin: "*", methods: "GET,HEAD,PUT,PATCH,POST,DELETE", preflightContinue: false, optionsSuccessStatus: 204 }));
+app.use(cookieParser());
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: true,
+    secret: Authentication.TOKEN,
+    cookie: { maxAge: oneDay },
+  })
+);
+app.use(
+  cors({ origin: "*", methods: "GET,HEAD,PUT,PATCH,POST,DELETE", preflightContinue: false, optionsSuccessStatus: 204 })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(authMiddleware);
 app.use(morgan(":method :url :status :res[content-length] - :response-time ms"));
 
-app.use("/auth", authRoute);
 
-app.use(cookieParser());
-//a get route for adding a cookie
-app.get("/setcookie", (req, res) => {
-  res.cookie(`Cookie token name`, `encrypted cookie string Value`, {
-    maxAge: 5000,
-    // expires works the same as the maxAge
-    expires: new Date("01 12 2021"),
-    secure: true,
-    httpOnly: true,
-    sameSite: "lax",
-  });
-  res.send("Cookie have been saved successfully");
+app.get("/getcookie", (req, res) => {
+  res.send(req.cookies);
 });
 
-/* app.use(
-  sessions({
-    secret: Authentication.TOKEN,
-    saveUninitialized: true,
-    cookie: { maxAge: oneDay },
-    resave: false,
-  })
-); */
-
+app.use(authMiddleware);
+app.use("/auth", authRoute);
 app.use("/client", routerClient);
 app.use("/pro", routerPro);
 app.use("/rating", routerRating);

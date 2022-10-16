@@ -37,12 +37,19 @@ export default class AuthController extends ClassCtrl {
           if (data.success && data.data[0]) {
             message = "Impossible de se connecter";
             try {
+              let token = Authentication.auth({ email: email });
               let user = data.data;
-              message = "Client connecté";
-              req.session = { user: user };
-              response.error = false;
-              response.data.push({ token: Authentication.auth({ email: email }) }, user);
+              user[0].token = token;
               code = 200;
+              message = "Client connecté";
+              response.error = false;
+              response.data = user;/*
+              res.cookie(`tkn`, user[0].token, {
+                maxAge: 3600 * 24 * 365,
+                secure: true,
+                httpOnly: true,
+                sameSite: "lax",
+              });*/
             } catch (error) {
               console.log(error);
             }

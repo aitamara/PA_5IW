@@ -10,4 +10,5 @@ routerCommunity.get("/getCommunitiyMembers", communityCtl.getCommunitiyMembers);
 routerCommunity.post("/addClientToCommunity", communityCtl.addClientToCommunity); //ajout d'un client à une communauté
 routerCommunity.post("/leaveCommunity", communityCtl.leaveCommunity); //client quitte une communauté
 
+// getCommunityByProId
 export { routerCommunity };

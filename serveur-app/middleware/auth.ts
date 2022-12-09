@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import TokenValidation from "../auth/token.validation";
 
-const AUTH_ROUTES = ["/auth/connect"];
+const AUTH_ROUTES = ["/auth/connect", "/client/register"];
 
 const authToken = (req: Request, res: Response, next: NextFunction) => {
 

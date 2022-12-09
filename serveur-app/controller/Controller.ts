@@ -35,7 +35,8 @@ export default class Controller {
       if (schemaData.find((item) => item.label.match(key))) {
         let typeVal = schemaData.find((item) => item.label.match(key))?.type as string;
         if (!value || value === "") {
-          listError.push(`Champ ${key} vide`);
+          if (key != "photo") // null possible
+            listError.push(`Champ ${key} vide`);
         } else {
           if (typeof value === typeVal) {
             if (typeVal === "string") {

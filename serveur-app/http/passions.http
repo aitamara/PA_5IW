@@ -11,23 +11,23 @@ content-type: application/json
 
 ###
 # CRÉER Client
-POST http://localhost:3001/client/register
+POST http://localhost:81/client/register
 content-type: application/json
 
 {
-    "email": "client1@mail.com",
+    "email": "client7@mail.com",
     "password":"password",
-    "lastname" : "NomCli1",
-    "firstname" : "PrenomCli1",
+    "lastname" : "NomCli7",
+    "firstname" : "PrenomCli7",
     "photo" : null,
-    "gender":"F",
-    "birthdate" : "11/04/2003",
-    "phone" : "0654345434",
-    "address" : "24 Rue Bouret",
+    "gender":"FEMALE",
+    "birthdate" : "2002-04-11",
+    "phone" : "0611111111",
+    "address" : "15RueBouret",
     "city" : "Paris",
     "zipcode" : "75019",
-    "here_for" : "both",
-    "intrested_by" : "M"
+    "here_for" : "ALL",
+    "intrested_by" : "MALE"
 }
 
 
@@ -36,6 +36,7 @@ content-type: application/json
 ###
 # LIST COMMUNITY by CLIENTID
 GET http://localhost:3001/community/getCommunityByClientId
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzA2MjQ0ODgsImV4cCI6MTY3MDcxMDg4OH0.SzPjpxl_5EY9nnnwTlJMmh_uQ1VSHT3_4fCILrZ0p7k
 content-type: application/json
 
 {
@@ -44,37 +45,39 @@ content-type: application/json
 
 ###
 # ADD CLIENT TO COMMUNITY
-POST http://localhost:3001/community/addClientToCommunity
+POST http://localhost:81/community/addClientToCommunity
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzA2MjQ0ODgsImV4cCI6MTY3MDcxMDg4OH0.SzPjpxl_5EY9nnnwTlJMmh_uQ1VSHT3_4fCILrZ0p7k
 content-type: application/json
 
 {
     "pro_id" : 1,
-    "client_id" : 20
+    "client_id" : 22
 }
 
 ###
 # FIRE CLIENT FROM COMMUNITY
-POST http://localhost:3001/community/fireClientFromCommunity
+POST http://localhost:81/community/fireClientFromCommunity
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzA2MjQ0ODgsImV4cCI6MTY3MDcxMDg4OH0.SzPjpxl_5EY9nnnwTlJMmh_uQ1VSHT3_4fCILrZ0p7k
 content-type: application/json
 
 {
-    "pro_id" : 1,
-    "client_id" : 20
+    "community_id" : 1
 }
 
 ###
 # LEAVE A COMMUNITY
-POST http://localhost:3001/community/leaveCommunity
+POST http://localhost:81/community/leaveCommunity
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzA0NTI5NzUsImV4cCI6MTY3MDUzOTM3NX0.eXoLTqw-p1LgI5AiPzJfqLs1HSDH0GIwEZ6ptvftD7A
 content-type: application/json
 
 {
-    "pro_id" : 1,
-    "client_id" : 20
+    "community_id" : 18
 }
 
 ###
 # GET COMMUNITY BY CLIENT ID
 GET http://localhost:3001/community/getCommunitiesByClientId
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzA2MjQ0ODgsImV4cCI6MTY3MDcxMDg4OH0.SzPjpxl_5EY9nnnwTlJMmh_uQ1VSHT3_4fCILrZ0p7k
 content-type: application/json
 
 {
@@ -136,7 +139,7 @@ content-type: application/json
 ###
 # LIRE Client
 POST http://localhost:81/client/getClientById
-Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NjI4NjM4NDAsImV4cCI6MTY2Mjk1MDI0MH0.u4DXIuD9ws18tQGze71KAFeoXARM4GNc3PHVgjofC9E
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzAyNzc1NjQsImV4cCI6MTY3MDM2Mzk2NH0.xEJtoDUOdwShCT0zVf75OWJaE3jUsX85yhwXnBba4hI
 content-type: application/json
 
 {
@@ -147,7 +150,7 @@ content-type: application/json
 ###
 # LIST Propositions de Match
 GET http://localhost:81/propositions/proposition
-Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NjI5MzYyNzgsImV4cCI6MTY2MzAyMjY3OH0.phKlFNe75yBLHkQf_3zflwwJtvQZcGcpUzp14__TUs0
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzAyNzc1NjQsImV4cCI6MTY3MDM2Mzk2NH0.xEJtoDUOdwShCT0zVf75OWJaE3jUsX85yhwXnBba4hI
 content-type: application/json
 
 {
@@ -157,7 +160,7 @@ content-type: application/json
 ###
 # LIST Pro
 POST http://localhost:81/pro/getAllPro
-Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NjI5NTAyMzgsImV4cCI6MTY2MzAzNjYzOH0.EvUcBqKG73yWIi3Cqs_c38GuR08aELqMp2MFqDbuK7w
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzAyNzc1NjQsImV4cCI6MTY3MDM2Mzk2NH0.xEJtoDUOdwShCT0zVf75OWJaE3jUsX85yhwXnBba4hI
 
 
 ###
@@ -197,4 +200,40 @@ content-type: application/json
 {
     "client_email" : "test",
     "client_password" : "password"
+}
+
+###
+# LIRE Toutes les communaute
+GET http://localhost:81/community/getAllCommunities
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzAyNzc1NjQsImV4cCI6MTY3MDM2Mzk2NH0.xEJtoDUOdwShCT0zVf75OWJaE3jUsX85yhwXnBba4hI
+content-type: application/json
+
+###
+# LIRE communaute by client id
+GET http://localhost:81/community/getCommunityByClientId
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzAyNzc1NjQsImV4cCI6MTY3MDM2Mzk2NH0.xEJtoDUOdwShCT0zVf75OWJaE3jUsX85yhwXnBba4hI
+content-type: application/json
+
+{
+    "client_id" : 18
+}
+
+###
+# GET pro by id
+POST http://localhost:81/pro/getProById
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzAyNzc1NjQsImV4cCI6MTY3MDM2Mzk2NH0.xEJtoDUOdwShCT0zVf75OWJaE3jUsX85yhwXnBba4hI
+content-type: application/json
+
+{
+    "pro_id" : 2
+}
+
+###
+# GET community's members by pro id
+POST http://localhost:81/community/getCommunitiyMembers
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzAyNzc1NjQsImV4cCI6MTY3MDM2Mzk2NH0.xEJtoDUOdwShCT0zVf75OWJaE3jUsX85yhwXnBba4hI
+content-type: application/json
+
+{
+    "pro_id" : 1
 }

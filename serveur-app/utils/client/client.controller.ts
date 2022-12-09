@@ -19,20 +19,21 @@ export default class ClientController extends Controller {
     let message: string = "Bad request";
     let response: QueryResponse = { error: true, message: message, data: [] };
 
-    if (Object.keys(req.params).length > 0) {
+    if (Object.keys(req.body).length > 0) {
       let dataIpt: Array<Verification> = [
         { label: "lastname", type: "string" },
         { label: "firstname", type: "string" },
         { label: "photo", type: "string" },
-        { label: "birthdate", type: "Date" },
-        { label: "adress", type: "string" },
+        { label: "birthdate", type: "string" },
+        { label: "address", type: "string" },
         { label: "city", type: "string" },
         { label: "zipcode", type: "string" },
-        { label: "mail", type: "string" },
+        { label: "email", type: "string" },
         { label: "here_for", type: "string" },
         { label: "gender", type: "string" },
-        { label: "interested_by", type: "string" },
+        { label: "intrested_by", type: "string" },
         { label: "password", type: "string" },
+        { label: "phone", type: "string" },
       ];
       let listError = this.verifSecure(dataIpt, req.body);
 
@@ -43,11 +44,11 @@ export default class ClientController extends Controller {
         try {
           code = 200;
           message = "Aucun client";
-          let { lastname, firstname, photo, birthdate, phone, adress, city, zipcode, gender, here_for, interested_by, password } = req.body;
-          let client = new ClientRegister(lastname, firstname, photo, birthdate, phone, adress, city, zipcode, gender, here_for, interested_by, password);
+          let { lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender, here_for, intrested_by, password } = req.body;
+          let client = new ClientRegister(lastname, firstname, photo, birthdate, phone, address, city, zipcode, gender, here_for, intrested_by, password);
           let data = await this.mdl.registerClient(client);
           if (data.success && data.data.length > 0) {
-            message = "Client récupéré";
+            message = "Client crée";
             response.data.push(data.data);
           }
         } catch (error) {
@@ -85,42 +86,6 @@ export default class ClientController extends Controller {
           if (data.data.length > 0) {
             message = "Client récupéré";
             response.data.push(data);
-          }
-        } catch (error) {
-          console.log(error);
-          res.status(400).send(error);
-        }
-      }
-    }
-    res.status(code).send(response);
-  };
-
-  /**
-   * Récupération des clients d'une communauté
-   *
-   * @param req
-   * @param res
-   */
-  public getClientOfCommunity = async (req: Request, res: Response) => {
-    let code = 400;
-    let message: string = "Bad request";
-    let response: QueryResponse = { error: true, message: message, data: [] };
-
-    if (Object.keys(req.params).length > 0) {
-      let dataIpt: Array<Verification> = [{ label: "id_community", type: "number" }];
-      let listError = this.verifSecure(dataIpt, req.body);
-
-      if (listError.length > 0) {
-        response.message = "Erreur";
-        response.data.push(listError);
-      } else {
-        try {
-          code = 200;
-          message = "Aucun client";
-          let data = await this.mdl.getClientsOfCommunity(+req.params.id_community);
-          if (data.success && data.data.length > 0) {
-            message = "Client récupéré";
-            response.data.push(data.data);
           }
         } catch (error) {
           console.log(error);

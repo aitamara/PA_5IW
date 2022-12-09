@@ -57,26 +57,6 @@ export default class ClientModel extends Model {
     }
   };
 
-  /**
-   *
-   * @param id_community
-   * @returns
-   */
-  getClientsOfCommunity = async (id_community: number) => {
-    try {
-      //table de jonction entre community et user
-      let { rows } = await this.model.dbClient.query(`SELECT * FROM user_comminty WHERE id_community = $1`, [id_community]);
-      if (rows.length > 0) {
-        return { success: true, message: "Utilisateur(s) trouvé(s)", data: rows };
-      } else {
-        return { success: false, message: "Aucun utilisateurs trouvés", data: [] };
-      }
-    } catch (err) {
-      console.error(err);
-      return { success: false, message: err, data: [] };
-    }
-  };
-
   //a retester suite aux modifs
   registerAuthDetails = async (body_params) => {
     const { email, password } = body_params;

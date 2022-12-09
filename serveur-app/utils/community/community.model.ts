@@ -5,17 +5,16 @@ import Community from "../entity/Community";
 
 export default class CommunityModel extends Model {
   private table: string = "community";
-  private table_with_user: string = "user_comminty";
   private model = new Model();
 
   /**
-   * Récupération des communauté
+   * Récupération des communautés
    *
-   * @param id_community
+   * @param
    *
    * @returns
    */
-  public getCommunity = async () => {
+  public getAllCommunities = async () => {
     try {
       let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table}`);
       if (rows.length > 0) {
@@ -36,13 +35,13 @@ export default class CommunityModel extends Model {
    *
    * @returns
    */
-  public getCommunityByClientId = async (id_community: number) => {
+  public getCommunityByClientId = async (client_id: number) => {
     try {
-      let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table} WHERE id = $1`, [id_community]);
+      let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table} WHERE client_id = $1`, [client_id]);
       if (rows.length > 0) {
-        return { success: true, message: "Communauté trouvée", data: rows };
+        return { success: true, message: "Communauté(s) trouvée(s)", data: rows };
       } else {
-        return { success: true, message: "Aucun communauté trouvée", data: [] };
+        return { success: true, message: "Aucune communauté trouvée", data: [] };
       }
     } catch (err) {
       console.error(err);
@@ -53,38 +52,17 @@ export default class CommunityModel extends Model {
   /**
    * Récupération des membres d'une communauté
    *
-   * @param id_community
+   * @param pro_id
    *
    * @returns
    */
-  /* public getCommunityByClientId = async (id_community: number) => {
+  public getCommunitiyMembers = async (pro_id: number) => {
     try {
-      let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table_with_user} WHERE id_community = $1`, [id_community]);
+      let { rows } = await this.model.dbClient.query(`SELECT client_id FROM ${this.table} WHERE pro_id = $1`, [pro_id]);
       if (rows.length > 0) {
-        return { success: true, message: "succes", data: rows };
+        return { success: true, message: "Membre de la communauté récupérés", data: rows };
       } else {
-        return { success: true, message: "Aucun utilisateurs trouvés", data: [] };
-      }
-    } catch (err) {
-      console.error(err);
-      return { success: false, message: err, data: [] };
-    }
-  }; */
-
-  /**
-   * Récupération des membres d'une communauté
-   *
-   * @param id_community
-   *
-   * @returns
-   */
-  public getCommunitiyMembers = async (id_pro: number, client: ClientAuth) => {
-    try {
-      let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table_with_user} WHERE id_pro = $1`, [id_pro]);
-      if (rows.length > 0) {
-        return { success: true, message: "succes", data: rows };
-      } else {
-        return { success: true, message: "Aucun utilisateurs trouvés", data: [] };
+        return { success: true, message: "Aucun utilisateur trouvé", data: [] };
       }
     } catch (err) {
       console.error(err);
@@ -99,14 +77,10 @@ export default class CommunityModel extends Model {
    *
    * @returns
    */
-  public addClientToCommunity = async (community: Community, client: Client) => {
+  public addClientToCommunity = async (pro_id: number, client_id: number) => {
     try {
-      let { rows } = await this.model.dbClient.query(`INSERT INTO ${this.table_with_user} `, []);
-      if (rows.length > 0) {
-        return { success: true, message: `Vous avez rejoins ${community.getName}`, data: rows };
-      } else {
-        return { success: false, message: `Impossible de rejoindre la communauté : ${community.getName}`, data: [] };
-      }
+      let { rows } = await this.model.dbClient.query(`INSERT INTO ${this.table} (pro_id, client_id) VALUES ($1, $2)`, [pro_id, client_id]);
+      return { success: true, message: `Vous avez rejoins la communauté`, data: rows };      
     } catch (err) {
       console.error(err);
       return { success: false, message: err, data: [] };
@@ -120,17 +94,56 @@ export default class CommunityModel extends Model {
    *
    * @returns
    */
-  public leaveCommunity = async (community: Community, client: Client) => {
+  public leaveCommunity = async (community_id : number) => {
     try {
-      let { rows } = await this.model.dbClient.query(`DELETE INTO ${this.table_with_user} WHERE id_community = $1 AND id_client = $2`, [community.getId, client.getId]);
-      if (rows.length > 0) {
-        return { success: true, message: `Vous avez quittez ${community.getName}`, data: rows };
-      } else {
-        return { success: false, message: `Impossible de quittez la communauté : ${community.getName}`, data: [] };
-      }
+      let { rows } = await this.model.dbClient.query(`UPDATE ${this.table} SET status = false WHERE id = $1`, [community_id]);
+      return { success: true, message: `Vous avez quitté la communauté`, data: rows };
+     
     } catch (err) {
       console.error(err);
       return { success: false, message: err, data: [] };
     }
   };
+
+  /**
+   * Virer un client d'une communauté
+   *
+   * @param id_community
+   *
+   * @returns
+   */
+   public fireClient = async (community_id : number) => {
+    try {
+      let { rows } = await this.model.dbClient.query(`UPDATE ${this.table} SET status = null WHERE id = $1`, [community_id]);
+      return { success: true, message: `Vous avez viré le client`, data: rows };
+     
+    } catch (err) {
+      console.error(err);
+      return { success: false, message: err, data: [] };
+    }
+  };
+
+  /**
+   * Vérifier si un client est déja membre d'un communauté
+   *
+   * @param client_id
+   * @param pro_id
+   * 
+   * @returns
+   */
+    public getClientAlredyMemberOfCommunity = async (client_id: number, pro_id: number) => {
+      if (client_id !== null || pro_id !== null) {
+        try {
+          let { rows } = await this.model.dbClient.query(`SELECT * FROM public.${this.table} WHERE client_id = $1 AND pro_id = $2`, [client_id, pro_id]);
+          if (rows.length > 0) {
+            return { success: true, message: "Déja membre", data: rows };
+          } else {
+            return { success: true, message: "Client pas membre", data: [] };
+          }
+        } catch (err) {
+          console.error(err);
+          return { success: false, message: err, data: [] };
+        }
+      }
+    };
 }

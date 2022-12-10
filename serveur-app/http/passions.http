@@ -61,7 +61,7 @@ Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudD
 content-type: application/json
 
 {
-    "community_id" : 1
+    "community_id" : 4
 }
 
 ###
@@ -150,7 +150,7 @@ content-type: application/json
 ###
 # LIST Propositions de Match
 GET http://localhost:81/propositions/proposition
-Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzAyNzc1NjQsImV4cCI6MTY3MDM2Mzk2NH0.xEJtoDUOdwShCT0zVf75OWJaE3jUsX85yhwXnBba4hI
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzA2MjQ0ODgsImV4cCI6MTY3MDcxMDg4OH0.SzPjpxl_5EY9nnnwTlJMmh_uQ1VSHT3_4fCILrZ0p7k
 content-type: application/json
 
 {

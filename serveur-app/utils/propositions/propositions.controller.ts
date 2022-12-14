@@ -24,8 +24,8 @@ export default class MatchController extends Controller {
 
     let dataIpt: Array<Verification> = [{ label: "pro_id", type: "number" }];
     let listError = this.verifSecure(dataIpt, req.body);
-    let client : Client;
-    client = new Client(100, "Bupont", "mat", "", new Date, "", "", "", "", Gender.FEM, Here.ALL, Gender.FEM);
+    let client_moi : Client;
+    client_moi = new Client(100, "Bupont", "mat", "", new Date, "", "", "", "", Gender.FEM, Here.ALL, Gender.FEM);
     if (listError.length > 0) {
       response.message = "Erreur";
       response.data.push(listError);
@@ -33,7 +33,7 @@ export default class MatchController extends Controller {
       try {
         let cltMdl = new ClientModel();
         let user: Client = req.session.user;
-        let propositions = await this.mdl.getPropositions(client, req.body.pro_id); //remplacer client par user en prod
+        let propositions = await this.mdl.getPropositions(client_moi, req.body.pro_id); //remplacer client_moi par user en prod
         code = 200;
         response.data = propositions.data;
         response.message = propositions.message

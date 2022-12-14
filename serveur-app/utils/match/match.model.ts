@@ -5,8 +5,54 @@ import Match from "../entity/Match";
 import Pro from "../entity/Pro";
 
 export default class MatchModel extends Model {
-  private table: string = "match";
+  private table: string = "matchs";
   private model = new Model();
+
+  /**
+   * Get a Match by Id
+   *
+   * @param my_id
+   * @param client_id_liked
+   * @param pro_id
+   *
+   * @returns
+   */
+   public getMatchById = async (match_id : number) => {
+    try {
+      let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table} WHERE id = $1`, [match_id]);
+      if (rows.length > 0){
+        return { success: true, message: `Match trouvé`, data: rows };
+      } else {
+        return { success: false, message: "Match non trouvé", data: [] };
+      }
+    } catch (err) {
+      console.error(err);
+      return { success: false, message: err, data: [] };
+    }
+  };
+
+  /**
+   * Create a Match
+   *
+   * @param my_id
+   * @param client_id_liked
+   * @param pro_id
+   *
+   * @returns
+   */
+   public createMatch = async (my_id : number, client_id_liked : number, pro_id : number) => {
+    try {
+      let { rows } = await this.model.dbClient.query(`INSERT INTO ${this.table} (client1_id, client2_id, status, pro_id) VALUES ($1, $2, $3, $4)`, [my_id, client_id_liked, "waiting", pro_id]);
+      if (rows.length == 0){
+        return { success: true, message: `Match crée`, data: rows };
+      } else {
+        return { success: false, message: "Match non crée", data: [] };
+      }
+    } catch (err) {
+      console.error(err);
+      return { success: false, message: err, data: [] };
+    }
+  };
 
   /**
    *
@@ -76,7 +122,54 @@ export default class MatchModel extends Model {
     }
   };
 
-  public setLike = async (client: Client, client_liked: Client) => {};
+  /**
+   * Récupérer une match suivant 2 client et un pro
+   *
+   * @param my_id
+   * @param client_id_liked
+   * @param pro_id
+   *
+   * @returns
+   */
+  public getMatchBy2ClientIdsAndProId = async (my_id : number, client_id_liked : number, pro_id : number) => {
+    try {
+      let { rows } = await this.model.dbClient.query(`SELECT * FROM ${this.table} WHERE (client1_id = $1 AND client2_id = $2) OR (client1_id = $2 AND client2_id = $1) AND pro_id = $3`, [my_id, client_id_liked, pro_id]);
+      if (rows.length > 0){
+        return { success: true, message: `Match trouvé`, data: rows };
+      } else {
+        return { success: false, message: "Aucun match trouvé", data: [] };
+      }
+    } catch (err) {
+      console.error(err);
+      return { success: false, message: err, data: [] };
+    }
+  };
+  
+  public setLike = async (match_id : number) => {
+    try {
+      let { rows } = await this.model.dbClient.query(`UPDATE ${this.table} SET status = $2 WHERE id = $1`, [match_id, "bingo"]);
+      if (rows.length == 0){
+        return { success: true, message: `Match status set to bingo`, data: rows };
+      } else {
+        return { success: false, message: "Status match non modifié", data: [] };
+      }
+    } catch (err) {
+      console.error(err);
+      return { success: false, message: err, data: [] };
+    } 
+  };
 
-  public setDislike = async (client: Client, client_liked: Client) => {};
+  public setDislike = async (match_id : number) => {
+    try {
+      let { rows } = await this.model.dbClient.query(`UPDATE ${this.table} SET status = $2 WHERE id = $1`, [match_id, "aie"]);
+      if (rows.length == 0){
+        return { success: true, message: `Match status set to aie`, data: rows };
+      } else {
+        return { success: false, message: "Status match non modifié", data: [] };
+      }
+    } catch (err) {
+      console.error(err);
+      return { success: false, message: err, data: [] };
+    } 
+  };
 }

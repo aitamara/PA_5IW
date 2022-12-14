@@ -237,3 +237,25 @@ content-type: application/json
 {
     "pro_id" : 1
 }
+
+###
+# Set like
+POST http://localhost:81/match/like
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzEwMDA2OTEsImV4cCI6MTY3MTA4NzA5MX0.aTx8Zd4_1p0dTaD1jeNOZiz4JcOMHTuIx0C7Bv2cO3w
+content-type: application/json
+
+{
+    "pro_id" : 1,
+    "client_id_liked" : 18 
+}
+
+###
+# Set dislike
+POST http://localhost:81/match/dislike
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzEwMDA2OTEsImV4cCI6MTY3MTA4NzA5MX0.aTx8Zd4_1p0dTaD1jeNOZiz4JcOMHTuIx0C7Bv2cO3w
+content-type: application/json
+
+{
+    "pro_id" : 1,
+    "client_id_disliked" : 22 
+}

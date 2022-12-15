@@ -46,7 +46,7 @@ export default class MatchController extends Controller {
               response.message = "Match récupérés";
             }
           }
-          response.error = data.success;
+          response.error = !data.success;
         } catch (error) {
           console.log(error);
           res.status(400).send(error);
@@ -85,19 +85,21 @@ export default class MatchController extends Controller {
           client_moi = new Client(22, "Bupont", "mat", "", new Date, "", "", "", "", Gender.FEM, Here.ALL, Gender.FEM);
           let match = await this.mdl.getMatchBy2ClientIdsAndProId(client_moi.getId, req.body.client_id_liked, req.body.pro_id); //remplacer client_moi par user en prod
           
-          if(match.data.length == 0) {
-            let createMatch = await this.mdl.createMatch(client_moi.getId, req.body.client_id_liked, req.body.pro_id); //remplacer client_moi par user en prod
+          if(match.data.length > 0) {
+            if (match.data[0]['status'] == "waiting") {
+              let like = await this.mdl.setLike(match.data[0]['id']); //remplacer client_moi par user en prod
+              response.data = like.data;
+              response.message = like.message
+              response.error = !like.success;
+
+              let createChatConv = await this.mdlConv.createChatConv(match.data[0]['id']);
+            }            
+          }
+          else {
+            let createMatch = await this.mdl.createMatch(client_moi.getId, req.body.client_id_liked, "waiting", req.body.pro_id); //remplacer client_moi par user en prod
             response.data = createMatch.data;
             response.message = createMatch.message;
             response.error = !createMatch.success;
-          }
-          else {
-            let like = await this.mdl.setLike(match.data[0]['id']); //remplacer client_moi par user en prod
-            response.data = like.data;
-            response.message = like.message
-            response.error = !like.success;
-
-            let createChatConv = await this.mdlConv.createChatConv(match.data[0]['id']); 
           }        
         }
         catch (error){
@@ -194,7 +196,7 @@ export default class MatchController extends Controller {
           client_moi = new Client(18, "Bupont", "mat", "", new Date, "", "", "", "", Gender.FEM, Here.ALL, Gender.FEM);
           let match = await this.mdl.getMatchBy2ClientIdsAndProId(client_moi.getId, req.body.client_id_disliked, req.body.pro_id); //remplacer client_moi par user en prod
           if(match.data.length == 0) {
-            let createMatch = await this.mdl.createMatch(client_moi.getId, req.body.client_id_disliked, req.body.pro_id); //remplacer client_moi par user en prod
+            let createMatch = await this.mdl.createMatch(client_moi.getId, req.body.client_id_disliked, "aie", req.body.pro_id); //remplacer client_moi par user en prod
             response.data = createMatch.data;
             response.message = createMatch.message;
             response.error = !createMatch.success;

@@ -259,3 +259,14 @@ content-type: application/json
     "pro_id" : 1,
     "client_id_disliked" : 22 
 }
+
+###
+# update conv
+POST http://localhost:81/conv/update
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzExMDg1NzgsImV4cCI6MTY3MTE5NDk3OH0.dXHaGuE30S-okuCbnLiR7147kA-eBEeAl259rJA9xvs
+content-type: application/json
+
+{
+    "chat_conv_id" : 1,
+    "status" : "signalee"
+}

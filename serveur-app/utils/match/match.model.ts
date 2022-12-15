@@ -40,9 +40,9 @@ export default class MatchModel extends Model {
    *
    * @returns
    */
-   public createMatch = async (my_id : number, client_id_liked : number, pro_id : number) => {
+   public createMatch = async (my_id : number, client_id_liked : number, status : string, pro_id : number) => {
     try {
-      let { rows } = await this.model.dbClient.query(`INSERT INTO ${this.table} (client1_id, client2_id, status, pro_id) VALUES ($1, $2, $3, $4)`, [my_id, client_id_liked, "waiting", pro_id]);
+      let { rows } = await this.model.dbClient.query(`INSERT INTO ${this.table} (client1_id, client2_id, status, pro_id) VALUES ($1, $2, $3, $4)`, [my_id, client_id_liked, status, pro_id]);
       if (rows.length == 0){
         return { success: true, message: `Match crée`, data: rows };
       } else {

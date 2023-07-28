@@ -36,7 +36,7 @@ content-type: application/json
 ###
 # LIST COMMUNITY by CLIENTID
 GET http://localhost:3001/community/getCommunityByClientId
-Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzA2MjQ0ODgsImV4cCI6MTY3MDcxMDg4OH0.SzPjpxl_5EY9nnnwTlJMmh_uQ1VSHT3_4fCILrZ0p7k
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzI3NTY1NTIsImV4cCI6MTY3Mjg0Mjk1Mn0.q5WouemDEFJFJmy_jo4Z-G-qqIv6fWAfg5OWmCsffL0
 content-type: application/json
 
 {
@@ -139,7 +139,7 @@ content-type: application/json
 ###
 # LIRE Client
 POST http://localhost:81/client/getClientById
-Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzAyNzc1NjQsImV4cCI6MTY3MDM2Mzk2NH0.xEJtoDUOdwShCT0zVf75OWJaE3jUsX85yhwXnBba4hI
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzI3NTY1NTIsImV4cCI6MTY3Mjg0Mjk1Mn0.q5WouemDEFJFJmy_jo4Z-G-qqIv6fWAfg5OWmCsffL0
 content-type: application/json
 
 {
@@ -159,8 +159,8 @@ content-type: application/json
 
 ###
 # LIST Pro
-POST http://localhost:81/pro/getAllPro
-Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzAyNzc1NjQsImV4cCI6MTY3MDM2Mzk2NH0.xEJtoDUOdwShCT0zVf75OWJaE3jUsX85yhwXnBba4hI
+GET http://localhost:81/pro/getAllPro
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzI4NDUxOTAsImV4cCI6MTY3MjkzMTU5MH0.82T2wmmlNtOVuxgvhlfky7KtRep_JMyANA2l64o-ae0
 
 
 ###
@@ -263,7 +263,7 @@ content-type: application/json
 ###
 # update conv
 POST http://localhost:81/conv/update
-Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzExMDg1NzgsImV4cCI6MTY3MTE5NDk3OH0.dXHaGuE30S-okuCbnLiR7147kA-eBEeAl259rJA9xvs
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzE0NTY0NzAsImV4cCI6MTY3MTU0Mjg3MH0.amxVyoy13VPJJwerm7YrjN1zApXtqFWbkKjGaxYYXQo
 content-type: application/json
 
 {

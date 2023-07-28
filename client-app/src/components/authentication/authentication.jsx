@@ -55,6 +55,7 @@ class Authentication extends React.Component {
                     }
                     throw new Error('Something went wrong');
                 }).then((response) => {
+                    console.log(response);
                     if (response.data && response.data[0] && response.data[0].role) {
                         if (response.data[0].role === "client") {
                             window.location.href = `/map?${new URLSearchParams(response.data[0]).toString()}`;

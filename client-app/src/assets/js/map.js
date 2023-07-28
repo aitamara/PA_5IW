@@ -22,6 +22,27 @@ map.on("style.load", () => {
 });
 
 map.on("load", () => {
+    console.log("HHHHHEEELLLOOOS");
+    const fetch = require('node-fetch');
+    const response = fetch("http://localhost:81/client/getClientById", {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": "Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2NzI3NTY1NTIsImV4cCI6MTY3Mjg0Mjk1Mn0.q5WouemDEFJFJmy_jo4Z-G-qqIv6fWAfg5OWmCsffL0"
+        },
+        body: {
+            "id_client" : 19
+        }
+      })
+      .then(res => res.json())
+      .then(json => {
+        console.log(json);
+        console.log("HHHHHEEELLLOOOS");
+      });
+
     // Add a GeoJSON source with 3 points.
     map.addSource("points", {
         type: "geojson",

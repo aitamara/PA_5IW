@@ -70,7 +70,8 @@ export default class ClientController extends Controller {
     let code = 400;
     let message: string = "Bad request";
     let response: QueryResponse = { error: true, message: message, data: [] };
-
+    console.log("heeyyy");
+    
     if (Object.keys(req.body).length > 0) {
       let dataIpt: Array<Verification> = [{ label: "id_client", type: "number" }];
       let listError = this.verifSecure(dataIpt, req.body);

@@ -4,11 +4,22 @@ import Pro from "../entity/Pro";
 let model = new Model();
 
 class ProModel extends Model {
-  static getAllPro() {
-    throw new Error("Method not implemented.");
-  }
   private table: string = "user_pro";
   private model = new Model();
+
+  static getAllPro = async () => {
+    try {
+      let { rows } = await model.dbClient.query(`SELECT * FROM public.user_pro`);
+      if (rows.length > 0) {
+        return { code: 200, message: "succes", data: [rows] };
+      } else {
+        return { code: 404, message: "Aucun Pro trouvé", data: [] };
+      }
+    } catch (err) {
+      console.error(err);
+      return { code: 500, message: err, data: [] };
+    }
+  }  
 
   public getProById = async (pro_id) => {
     try {

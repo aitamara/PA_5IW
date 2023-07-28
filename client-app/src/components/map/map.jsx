@@ -69,31 +69,39 @@ class Map extends React.Component {
             map.setFog({}); // Set the default atmosphere style
         });
 
-        map.on("load", () => {
-            //console.log(window.location.href.split('&')[1].split('=')[1]);
-            //let token = window.location.href.split('&')[0].split('=')[1];
-            //let id_client = window.location.href.split('&')[0].split('=')[1];
-            /*
-            fetch("http://127.0.0.1:81/pro/getAllPro", {
+        map.on("load", async () => {
+            const response = await fetch("http://localhost:81/pro/getAllPro", {
+                method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, *cors, same-origin
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', // include, *same-origin, omit
                 headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                    Authorization:
-                        "Bearer "+token,
+                "Authorization": "Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudDFAbWFpbC5jb20iLCJpYXQiOjE2Nzc2OTg3OTcsImV4cCI6MTY3Nzc4NTE5N30.N9vMBVcsyQraLDgB_YDp39rL4Mzoo2hLEDOCyYttqg0"
                 },
-                method: "GET",
-                withCredentials: true,
-                credentials: "same-origin",
+                body: null
+            }).then(response => response.json());
+
+            let pros = response.data[0];
+            console.log(pros);
+
+            //---------------------------------
+            const mapboxSdk = require('@mapbox/mapbox-sdk');
+            const geocodingClient = mapboxSdk({ accessToken: 'pk.eyJ1IjoibWRyYWJhaCIsImEiOiJjbGVxZzZzdm4waXJqM3NwMmQxZmFvMDlvIn0.mc3dPdVOGGA77aabR0IiqQ' }).geocoding;
+
+            const address = '1600 Amphitheatre Parkway, Mountain View, CA';
+
+            geocodingClient.forwardGeocode({
+            query: address,
+            limit: 1
             })
-            .then((response) => {
-                response.json().then(function (json) {
-                    console.log(json);
-                });
+            .send()
+            .then(response => {
+                const coordinates = response.body.features[0].center;
+                console.log(`Latitude: ${coordinates[1]}, Longitude: ${coordinates[0]}`);
             })
-            .catch((error) => {
-            });
-           console.log(token)
-            */
+            .catch(error => console.error(error));
+            //---------------------------------
+
             map.addSource("points", {
                 type: "geojson",
                 data: {
